@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>OPERIS — Provisioning Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0D0D12;
+    color: #FFFFFF;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 16px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.2em;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #888888;
+    font-weight: 400;
+  }
+
+  /* Card */
+  .card {
+    background: #16161F;
+    border-radius: 8px;
+    padding: 28px 24px;
+  }
+
+  /* Form fields */
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field:last-of-type {
+    margin-bottom: 28px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #AAAAAA;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  input[type="text"],
+  input[type="tel"] {
+    width: 100%;
+    height: 48px;
+    background: #0D0D12;
+    border: 1px solid #2A2A36;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 0 14px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input[type="text"]::placeholder,
+  input[type="tel"]::placeholder {
+    color: #555555;
+  }
+
+  input[type="text"]:focus,
+  input[type="tel"]:focus {
+    border-color: #C9A84C;
+  }
+
+  /* Segmented control */
+  .segmented {
+    display: flex;
+    gap: 0;
+    border: 1px solid #2A2A36;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .segmented button {
+    flex: 1;
+    height: 48px;
+    background: transparent;
+    border: none;
+    color: #888888;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
+
+  .segmented button + button {
+    border-left: 1px solid #2A2A36;
+  }
+
+  .segmented button[aria-pressed="true"] {
+    background: #C9A84C;
+    color: #000000;
+  }
+
+  /* Submit */
+  .btn-submit {
+    width: 100%;
+    height: 48px;
+    background: #C9A84C;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: opacity 0.15s;
+  }
+
+  .btn-submit:disabled {
+    cursor: not-allowed;
+  }
+
+  /* Spinner */
+  .spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: #000000;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Loading state */
+  .form-wrap.loading input,
+  .form-wrap.loading .segmented button {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .loading-msg {
+    text-align: center;
+    color: #888888;
+    font-size: 14px;
+    margin-top: 16px;
+    display: none;
+  }
+
+  .form-wrap.loading .loading-msg {
+    display: block;
+  }
+
+  .form-wrap.loading .spinner {
+    display: block;
+  }
+
+  /* Error banner */
+  .error-banner {
+    background: rgba(255, 68, 68, 0.1);
+    color: #FF4444;
+    font-size: 14px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 16px;
+    display: none;
+    line-height: 1.5;
+  }
+
+  .error-banner.visible {
+    display: block;
+  }
+
+  /* Success state */
+  .success-view {
+    display: none;
+    text-align: center;
+    padding: 12px 0 4px;
+  }
+
+  .success-view .phone-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #C9A84C;
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+
+  .success-view .success-label {
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 32px;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .btn-copy,
+  .btn-call {
+    flex: 1;
+    height: 48px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-copy {
+    background: #C9A84C;
+    color: #000000;
+    border: none;
+  }
+
+  .btn-call {
+    background: transparent;
+    color: #C9A84C;
+    border: 2px solid #C9A84C;
+    text-decoration: none;
+  }
+
+  .create-another {
+    color: #888888;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .create-another:hover {
+    color: #AAAAAA;
+  }
+
+  /* Fade transitions */
+  .form-section {
+    transition: opacity 0.25s ease;
+  }
+
+  .form-section.hidden {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  }
+
+  .success-view.visible {
+    display: block;
+    animation: fadeUp 0.35s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <div class="wordmark">OPERIS</div>
+    <div class="subtitle">Provisioning Console</div>
+  </header>
+
+  <div class="card">
+    <div class="form-section" id="formSection">
+      <form id="provisionForm" class="form-wrap" novalidate>
+        <div class="field">
+          <label for="businessName">Business Name</label>
+          <input type="text" id="businessName" placeholder="ร้านตัดผมสมชาย" autocomplete="organization" required>
+        </div>
+
+        <div class="field">
+          <label for="ownerPhone">Owner Phone</label>
+          <input type="tel" id="ownerPhone" value="+66" placeholder="0812345678" autocomplete="tel">
+        </div>
+
+        <div class="field">
+          <label>Language</label>
+          <div class="segmented" role="radiogroup" aria-label="Language">
+            <button type="button" role="radio" aria-pressed="true" data-lang="th">ไทย</button>
+            <button type="button" role="radio" aria-pressed="false" data-lang="en">English</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span class="spinner"></span>
+          <span class="btn-label">Create Receptionist</span>
+        </button>
+
+        <div class="loading-msg">กำลังสร้าง AI receptionist ของคุณ...</div>
+        <div class="error-banner" id="errorBanner"></div>
+      </form>
+    </div>
+
+    <div class="success-view" id="successView">
+      <div class="phone-display" id="phoneDisplay"></div>
+      <div class="success-label">AI Receptionist Line</div>
+      <div class="success-actions">
+        <button class="btn-copy" id="copyBtn">Copy Number</button>
+        <a class="btn-call" id="callBtn" href="tel:">Call Now</a>
+      </div>
+      <button class="create-another" id="resetBtn">Create Another</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const form = document.getElementById('provisionForm');
+  const formSection = document.getElementById('formSection');
+  const successView = document.getElementById('successView');
+  const businessName = document.getElementById('businessName');
+  const ownerPhone = document.getElementById('ownerPhone');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnLabel = submitBtn.querySelector('.btn-label');
+  const errorBanner = document.getElementById('errorBanner');
+  const phoneDisplay = document.getElementById('phoneDisplay');
+  const copyBtn = document.getElementById('copyBtn');
+  const callBtn = document.getElementById('callBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  const langBtns = document.querySelectorAll('.segmented button');
+  let selectedLang = 'th';
+
+  // Language toggle
+  langBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      langBtns.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      btn.setAttribute('aria-pressed', 'true');
+      selectedLang = btn.dataset.lang;
+    });
+  });
+
+  // Phone normalization
+  function normalizePhone(raw) {
+    var trimmed = raw.trim();
+    if (trimmed.startsWith('0')) {
+      return '+66' + trimmed.slice(1);
+    }
+    if (trimmed.startsWith('+66')) {
+      return trimmed;
+    }
+    if (trimmed.startsWith('66') && trimmed.length > 2) {
+      return '+' + trimmed;
+    }
+    return trimmed;
+  }
+
+  // Format phone for display: +66 91 007 4923
+  function formatPhone(phone) {
+    var digits = phone.replace(/\D/g, '');
+    // digits: 66910074923
+    if (digits.startsWith('66') && digits.length >= 11) {
+      var local = digits.slice(2); // 910074923
+      return '+66 ' + local.slice(0, 2) + ' ' + local.slice(2, 5) + ' ' + local.slice(5);
+    }
+    return phone;
+  }
+
+  // Validate
+  function validate() {
+    if (!businessName.value.trim()) return 'Business name is required.';
+    var phone = ownerPhone.value.trim();
+    if (!phone || phone === '+66') return 'Phone number is required.';
+    if (!phone.startsWith('0') && !phone.startsWith('+66') && !phone.startsWith('66')) {
+      return 'Phone must start with 0 or +66.';
+    }
+    return null;
+  }
+
+  function setLoading(on) {
+    if (on) {
+      form.classList.add('loading');
+      submitBtn.disabled = true;
+      btnLabel.textContent = 'Setting up...';
+    } else {
+      form.classList.remove('loading');
+      submitBtn.disabled = false;
+      btnLabel.textContent = 'Create Receptionist';
+    }
+  }
+
+  function showError(msg) {
+    errorBanner.textContent = msg;
+    errorBanner.classList.add('visible');
+  }
+
+  function hideError() {
+    errorBanner.classList.remove('visible');
+  }
+
+  // Submit
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideError();
+
+    var err = validate();
+    if (err) {
+      showError(err);
+      return;
+    }
+
+    var phone = normalizePhone(ownerPhone.value);
+    var payload = {
+      businessName: businessName.value.trim(),
+      ownerPhone: phone,
+      language: selectedLang
+    };
+
+    setLoading(true);
+
+    fetch('https://operis-backend-production-3533.up.railway.app/provision', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+    .then(function (result) {
+      setLoading(false);
+
+      if (!result.ok || result.data.error) {
+        showError(result.data.error || 'Something went wrong. Please try again.');
+        return;
+      }
+
+      var rawPhone = result.data.phone_number;
+      var formatted = formatPhone(rawPhone);
+
+      phoneDisplay.textContent = formatted;
+      callBtn.href = 'tel:' + rawPhone.replace(/\s/g, '');
+
+      formSection.classList.add('hidden');
+      successView.classList.add('visible');
+
+      // Store raw for copy
+      copyBtn.dataset.phone = rawPhone;
+    })
+    .catch(function () {
+      setLoading(false);
+      showError('Network error — check your connection and try again.');
+    });
+  });
+
+  // Copy
+  copyBtn.addEventListener('click', function () {
+    var phone = copyBtn.dataset.phone;
+    navigator.clipboard.writeText(phone).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Number'; }, 1500);
+    });
+  });
+
+  // Reset
+  resetBtn.addEventListener('click', function () {
+    successView.classList.remove('visible');
+    formSection.classList.remove('hidden');
+    form.reset();
+    ownerPhone.value = '+66';
+    langBtns[0].setAttribute('aria-pressed', 'true');
+    langBtns[1].setAttribute('aria-pressed', 'false');
+    selectedLang = 'th';
+    hideError();
+  });
+})();
+</script>
+</body>
+</html>
