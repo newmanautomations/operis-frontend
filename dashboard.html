@@ -67,15 +67,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 0 72px;
+    padding: 0 0 84px;
     -webkit-font-smoothing: antialiased;
     transition: background 0.25s, color 0.25s;
   }
 
   .container {
     width: 100%;
-    max-width: 480px;
-    padding: 0 16px;
+    max-width: 440px;
+    padding: 0 18px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -86,7 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0 14px;
+    padding: 24px 0 18px;
     position: sticky;
     top: 0;
     background: var(--bg);
@@ -155,49 +155,50 @@
   .btn-refresh svg { width: 17px; height: 17px; color: var(--text-faint); }
 
   /* Stats strip */
-  .stats-strip { display: flex; gap: 10px; margin-bottom: 24px; }
+  .stats-strip {
+    display: flex;
+    gap: 10px;
+    position: sticky;
+    top: var(--header-h, 80px);
+    z-index: 9;
+    background: var(--bg);
+    padding: 8px 0 14px;
+    margin: 0 0 18px;
+    transition: background 0.25s;
+  }
 
   .stat-box {
     flex: 1;
     background: var(--card);
-    border-radius: 10px;
-    padding: 16px 10px 14px;
-    box-shadow: var(--shadow);
+    border-radius: 14px;
+    padding: 22px 16px 18px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.025);
     transition: background 0.25s;
     text-align: left;
     position: relative;
     overflow: hidden;
   }
 
-  .stat-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
-    opacity: 0.5;
-    border-radius: 0 2px 2px 0;
-  }
-
   .stat-number {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 28px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 44px;
     color: var(--text);
-    line-height: 1;
-    margin-bottom: 3px;
-    padding-left: 10px;
+    line-height: 0.95;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    padding-left: 0;
   }
 
   .stat-label {
     font-family: 'DM Sans', sans-serif;
     font-size: 10px;
-    color: var(--text-faint);
+    color: var(--text-muted);
     font-weight: 500;
-    line-height: 1.3;
+    line-height: 1.4;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding-left: 10px;
+    letter-spacing: 0.08em;
+    padding-left: 0;
   }
 
   /* Section headers */
@@ -222,6 +223,40 @@
 
   .skeleton-stat .skeleton-line.num { width: 36px; height: 34px; }
   .skeleton-stat .skeleton-line.lbl { width: 48px; height: 12px; }
+
+  /* Empty state */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+    min-height: 320px;
+    flex: 1;
+    animation: fadeIn 0.25s ease both;
+  }
+  .empty-icon {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--gold-bg);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+  }
+  .empty-icon svg { width: 34px; height: 34px; color: var(--gold); stroke-width: 1.5; }
+  .empty-title {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .empty-desc {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 260px;
+    line-height: 1.5;
+  }
 
   /* Error banner */
   .error-banner {
@@ -326,39 +361,41 @@
   }
 
   .bottom-nav-inner {
-    width: 100%; max-width: 480px;
-    display: flex; padding: 0 8px;
+    width: 100%; max-width: 440px;
+    display: flex; padding: 4px 12px 0;
   }
 
   .nav-tab {
     flex: 1;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 1px; padding: 8px 0 12px;
+    gap: 4px; padding: 10px 0 14px;
     background: none; border: none; cursor: pointer;
-    min-height: 52px; color: var(--text-ghost);
+    min-height: 58px; color: var(--text-muted);
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     position: relative; transition: color 0.15s;
   }
 
-  .nav-tab svg { width: 20px; height: 20px; stroke-width: 1.5; }
+  .nav-tab svg { width: 22px; height: 22px; stroke-width: 1.6; }
 
   .nav-tab span {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 0.02em;
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.03em;
   }
 
-  .nav-tab.active { color: var(--text); }
+  .nav-tab.active { color: var(--gold); }
+  .nav-tab.active svg { stroke-width: 2; }
+  .nav-tab.active span { font-weight: 600; }
 
   .nav-tab.active::before {
     content: '';
     position: absolute; top: 0; left: 50%;
     transform: translateX(-50%);
-    width: 16px; height: 2px;
+    width: 28px; height: 3px;
     background: var(--gold);
-    border-radius: 0 0 1px 1px;
+    border-radius: 0 0 3px 3px;
   }
 
   /* Toast */
@@ -387,54 +424,109 @@
   .bookings-view { display: flex; flex-direction: column; flex: 1; animation: fadeIn 0.2s ease both; }
   .bookings-view.hidden { display: none; }
 
-  /* Calendar container */
-  .mini-cal { margin-bottom: 12px; }
+  /* Calendar */
+  .mini-cal { margin-top: 4px; margin-bottom: 24px; }
 
-  .cal-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 10px;
+  /* Fixed calendar header: date row + view toggle */
+  .cal-fixed-bar {
+    position: fixed;
+    top: calc(var(--header-h, 80px) + var(--stats-h, 124px));
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    transition: background 0.25s;
   }
 
-  .cal-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 17px; font-weight: 600;
+  .cal-fixed-bar[hidden] { display: none; }
+
+  .cal-fixed-inner {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 10px 18px 10px;
+  }
+
+  .cal-date-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 8px;
+  }
+
+  .cal-date-title {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--text);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
   }
-
-  .cal-title-sub {
-    font-weight: 400; font-size: 14px;
-    color: var(--text-faint); margin-left: 6px;
-  }
-
-  .cal-nav { display: flex; gap: 0; }
 
   .cal-nav-btn {
-    width: 36px; height: 36px;
-    border: none; background: transparent;
-    border-radius: 6px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-faint);
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
   }
-
-  .cal-nav-btn:active { color: var(--text); }
+  .cal-nav-btn:hover:not([disabled]) { background: var(--setting-hover); color: var(--text); }
+  .cal-nav-btn:active:not([disabled]) { color: var(--text); }
   .cal-nav-btn svg { width: 18px; height: 18px; }
+  .cal-nav-btn[disabled] { opacity: 0.3; cursor: default; }
 
-  /* View toggle — pill style */
+  .cal-today-btn {
+    flex-shrink: 0;
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+    background: var(--gold-bg);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 6px 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 4px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .cal-today-btn:hover { background: rgba(201,168,76,0.18); }
+  .cal-today-btn:active { transform: scale(0.96); }
+  .cal-today-btn[hidden] { display: none; }
+
   .cal-view-toggle {
     display: flex;
     background: var(--border);
-    border-radius: 6px;
+    border-radius: 7px;
     padding: 2px;
-    margin-bottom: 12px;
+    transition: background 0.25s;
   }
 
   .cal-vt-btn {
-    flex: 1; padding: 8px 0;
-    border: none; background: transparent;
+    flex: 1;
+    padding: 7px 0;
+    border: none;
+    background: transparent;
     border-radius: 5px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px; font-weight: 600;
-    color: var(--text-faint);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
   }
@@ -445,72 +537,42 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.06);
   }
 
-  /* Monthly grid */
-  .month-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
+  @media (min-width: 600px) {
+    .cal-fixed-inner { max-width: 560px; padding: 12px 28px 12px; }
+    .cal-date-title { font-size: 16px; }
+  }
+  @media (min-width: 820px) {
+    .cal-fixed-inner { max-width: 600px; padding: 12px 32px 12px; }
   }
 
-  .month-dow {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 600;
-    color: var(--text-ghost);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0 0 6px;
-  }
+  /* Content area below fixed bar */
+  .cal-content { padding-top: var(--cal-bar-h, 140px); }
 
-  .month-day {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px; font-weight: 500;
-    color: var(--text-muted);
-    aspect-ratio: 1;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    position: relative;
-  }
+  /* Day-view stacked grids */
+  .cal-days { position: relative; }
+  .cal-day { position: relative; }
 
-  .month-day.other { opacity: 0.25; }
-
-  .month-day.today {
-    color: var(--card);
-    background: var(--text);
-    font-weight: 700;
-  }
-
-  .month-day.has-booking:not(.today)::after {
-    content: '';
-    position: absolute; bottom: 2px; left: 50%;
-    transform: translateX(-50%);
-    width: 4px; height: 4px;
-    background: var(--gold);
-    border-radius: 50%;
-  }
-
-  /* Time grid (daily + weekly) */
-  .cal-timetable {
-    position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 560px;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .cal-tt-inner { position: relative; }
-
+  /* Shared hour gutter / lines */
   .cal-hour-label {
     position: absolute;
-    left: 0; width: 40px;
+    left: 0; width: 42px;
     font-family: 'DM Sans', sans-serif;
     font-size: 11px; font-weight: 500;
     color: var(--text-faint);
     text-align: right;
-    padding-right: 8px;
+    padding-right: 6px;
     transform: translateY(-50%);
     line-height: 1;
     pointer-events: none;
     z-index: 1;
+  }
+
+  .cal-hour-label.cal-hour-date {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
   }
 
   .cal-hour-line {
@@ -538,7 +600,6 @@
     z-index: 5;
     pointer-events: none;
   }
-
   .cal-now::before {
     content: '';
     position: absolute;
@@ -548,7 +609,6 @@
     border-radius: 50%;
   }
 
-  /* Booking blocks */
   .cal-block {
     position: absolute;
     left: 46px; right: 2px;
@@ -561,9 +621,7 @@
     z-index: 2;
     transition: opacity 0.1s;
   }
-
   [data-theme="dark"] .cal-block { background: #252018; }
-
   .cal-block:active { opacity: 0.7; }
 
   .cal-block-service {
@@ -587,50 +645,107 @@
     line-height: 1.3;
   }
 
-  /* Weekly header */
-  .wk-header {
+  /* Week view */
+  .cal-week-header {
     display: grid;
     grid-template-columns: 44px repeat(7, 1fr);
     border-bottom: 1px solid var(--border);
-    padding-bottom: 6px;
-    margin-bottom: 0;
+    padding: 6px 0 8px;
+    margin-bottom: 4px;
   }
 
-  .wk-hcell {
+  .cal-week-hcell {
     text-align: center;
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px; font-weight: 600;
-    color: var(--text-faint);
+    font-size: 10px; font-weight: 600;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
     line-height: 1;
   }
 
-  .wk-hcell-num {
-    font-size: 16px; font-weight: 700;
-    color: var(--text-muted);
+  .cal-week-hnum {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text);
     display: block;
-    margin-top: 3px;
+    margin-top: 4px;
   }
 
-  .wk-hcell.is-today .wk-hcell-num {
+  .cal-week-hcell.is-today .cal-week-hnum {
     color: var(--card);
     background: var(--text);
     border-radius: 50%;
-    width: 28px; height: 28px;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 14px;
+    width: 26px; height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 2px;
   }
 
-  .wk-cols {
+  .cal-week-body { position: relative; }
+
+  .cal-week-cols {
     position: absolute;
     top: 0; bottom: 0; left: 44px; right: 0;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     pointer-events: none; z-index: 0;
   }
+  .cal-week-col + .cal-week-col { border-left: 1px solid var(--border); }
 
-  .wk-col + .wk-col { border-left: 1px solid var(--border); }
+  /* Month view */
+  .cal-month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .cal-month-dow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  .cal-month-day {
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--card);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.03);
+  }
+
+  .cal-month-day:active { background: var(--setting-hover); }
+  .cal-month-day.other { color: var(--text-ghost); background: transparent; box-shadow: none; cursor: default; }
+  .cal-month-day.today { border-color: var(--gold); color: var(--gold); font-weight: 700; }
+
+  .cal-month-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px; font-weight: 700;
+    color: var(--gold);
+    background: var(--gold-bg);
+    padding: 2px 6px;
+    border-radius: 8px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
 
   /* Edit overlay */
   .cal-edit-overlay {
@@ -638,7 +753,7 @@
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.4);
-    z-index: 50;
+    z-index: 200;
     align-items: flex-end;
     justify-content: center;
   }
@@ -792,28 +907,23 @@
   /* Responsive */
   @media (max-width: 375px) {
     .container { padding: 0 14px; }
-    .stat-number { font-size: 24px; }
-    .stats-strip { gap: 6px; }
-    .stat-box { padding: 12px 8px 10px; }
+    .stat-number { font-size: 36px; }
+    .stats-strip { gap: 8px; }
+    .stat-box { padding: 18px 12px 14px; }
     .shop-name { font-size: 18px; }
   }
 
-  @media (min-width: 480px) {
-    .container { padding: 0 20px; }
-    .stat-number { font-size: 32px; }
+  @media (min-width: 600px) {
+    .container { max-width: 560px; padding: 0 28px; }
+    .stat-number { font-size: 52px; }
+    .stat-box { padding: 28px 20px 22px; }
+    .stats-strip { gap: 14px; padding: 10px 0 18px; margin-bottom: 22px; }
+    .bottom-nav-inner { max-width: 560px; }
   }
 
-  @media (min-width: 768px) {
-    .container { max-width: 600px; padding: 0 24px; }
-    .stat-number { font-size: 34px; }
-    .stat-box { padding: 18px 14px 14px; }
-    .stats-strip { gap: 12px; margin-bottom: 28px; }
+  @media (min-width: 820px) {
+    .container { max-width: 600px; padding: 0 32px; }
     .bottom-nav-inner { max-width: 600px; }
-  }
-
-  @media (min-width: 1024px) {
-    .container { max-width: 680px; padding: 0 32px; }
-    .bottom-nav-inner { max-width: 680px; }
   }
 </style>
 </head>
@@ -867,6 +977,26 @@
   </div>
 </div>
 
+<div class="cal-fixed-bar" id="calFixedBar" hidden>
+  <div class="cal-fixed-inner">
+    <div class="cal-date-row">
+      <button class="cal-nav-btn" id="calPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17l-5-5 5-5"/></svg>
+      </button>
+      <div class="cal-date-title" id="calDateTitle"></div>
+      <button class="cal-nav-btn" id="calNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5"/></svg>
+      </button>
+      <button class="cal-today-btn" id="calToday" data-i18n="today_label" hidden>วันนี้</button>
+    </div>
+    <div class="cal-view-toggle" id="calViewToggle">
+      <button class="cal-vt-btn" data-v="day" data-i18n="cal_daily">วัน</button>
+      <button class="cal-vt-btn" data-v="week" data-i18n="cal_weekly">สัปดาห์</button>
+      <button class="cal-vt-btn" data-v="month" data-i18n="cal_monthly">เดือน</button>
+    </div>
+  </div>
+</div>
+
 <div class="cal-edit-overlay" id="calEditOverlay">
   <div class="cal-edit-card">
     <div class="cal-edit-handle"></div>
@@ -890,8 +1020,7 @@
       <textarea class="cal-edit-input" id="calEditNotes"></textarea>
     </div>
     <div class="cal-edit-actions">
-      <button class="cal-edit-btn cal-edit-cancel" id="calEditCancel" data-i18n="cal_edit_cancel">ยกเลิก</button>
-      <button class="cal-edit-btn cal-edit-save" id="calEditSave" data-i18n="cal_edit_save">บันทึก</button>
+      <button class="cal-edit-btn cal-edit-cancel" id="calEditCancel" data-i18n="cal_edit_done">เสร็จ</button>
     </div>
   </div>
 </div>
@@ -944,20 +1073,25 @@ const STRINGS = {
     stat_week: 'นัดสัปดาห์นี้',
     stat_clients: 'ลูกค้าทั้งหมด',
     coming_soon: 'เร็วๆ นี้',
-    cal_monthly: 'เดือน',
-    cal_weekly: 'สัปดาห์',
     cal_daily: 'วัน',
+    cal_weekly: 'สัปดาห์',
+    cal_monthly: 'เดือน',
     cal_edit_title: 'แก้ไขนัดหมาย',
     cal_edit_date: 'วันที่',
     cal_edit_time: 'เวลา',
     cal_edit_service: 'บริการ',
     cal_edit_notes: 'หมายเหตุ',
-    cal_edit_cancel: 'ยกเลิก',
-    cal_edit_save: 'บันทึก',
+    cal_edit_done: 'เสร็จ',
+    saved: 'บันทึกแล้ว',
+    error_save: 'บันทึกไม่สำเร็จ',
     search_clients: 'ค้นหาลูกค้า...',
     client_visits: 'ครั้ง',
+    today_label: 'วันนี้',
+    empty_timeline_title: 'ไม่มีนัดหมายในช่วง 14 วันข้างหน้า',
+    empty_timeline_desc: 'ตารางของคุณยังว่างอยู่ นัดหมายใหม่จะแสดงที่นี่',
+    empty_clients_title: 'ไม่พบลูกค้า',
+    empty_clients_desc: 'ลองค้นหาด้วยชื่อหรือหมายเลขโทรศัพท์อื่น',
     months: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
-    months_full: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
     days: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
     days_short: ['อา','จ','อ','พ','พฤ','ศ','ส'],
     date_prefix: 'วัน',
@@ -981,20 +1115,25 @@ const STRINGS = {
     stat_week: "This Week's Bookings",
     stat_clients: 'Total Clients',
     coming_soon: 'Coming soon',
-    cal_monthly: 'Month',
-    cal_weekly: 'Week',
     cal_daily: 'Day',
+    cal_weekly: 'Week',
+    cal_monthly: 'Month',
     cal_edit_title: 'Edit Booking',
     cal_edit_date: 'Date',
     cal_edit_time: 'Time',
     cal_edit_service: 'Service',
     cal_edit_notes: 'Notes',
-    cal_edit_cancel: 'Cancel',
-    cal_edit_save: 'Save',
+    cal_edit_done: 'Done',
+    saved: 'Saved',
+    error_save: 'Save failed',
     search_clients: 'Search clients...',
     client_visits: 'visits',
+    today_label: 'Today',
+    empty_timeline_title: 'No bookings in the next 14 days',
+    empty_timeline_desc: 'Your schedule is clear. New bookings will show up here.',
+    empty_clients_title: 'No clients found',
+    empty_clients_desc: 'Try a different name or phone number.',
     months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-    months_full: ['January','February','March','April','May','June','July','August','September','October','November','December'],
     days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
     days_short: ['Su','Mo','Tu','We','Th','Fr','Sa'],
     date_prefix: '',
@@ -1090,6 +1229,7 @@ function escHtml(s) { var d = document.createElement('div'); d.textContent = s; 
 // ── Renderers ──
 function renderSkeletonStats() {
   statsStrip.innerHTML = ('<div class="skeleton-stat"><div class="skeleton-line num"></div><div class="skeleton-line lbl"></div></div>').repeat(3);
+  if (typeof measureHeader === 'function') measureHeader();
 }
 
 function renderStats(todayCount, weekCount, clientCount) {
@@ -1097,15 +1237,16 @@ function renderStats(todayCount, weekCount, clientCount) {
     '<div class="stat-box fade-in"><div class="stat-number">'+todayCount+'</div><div class="stat-label">'+t('stat_today')+'</div></div>' +
     '<div class="stat-box fade-in"><div class="stat-number">'+weekCount+'</div><div class="stat-label">'+t('stat_week')+'</div></div>' +
     '<div class="stat-box fade-in"><div class="stat-number">'+clientCount+'</div><div class="stat-label">'+t('stat_clients')+'</div></div>';
+  if (typeof measureHeader === 'function') measureHeader();
 }
 
 function showError() { errorBanner.classList.add('visible'); }
 function hideError() { errorBanner.classList.remove('visible'); }
 
-function showToast(msg) {
+function showToast(msg, duration) {
   toast.textContent = msg;
   toast.classList.add('show');
-  setTimeout(function() { toast.classList.remove('show'); }, 1800);
+  setTimeout(function() { toast.classList.remove('show'); }, duration || 1800);
 }
 
 // ── Navigation ──
@@ -1122,15 +1263,19 @@ function switchView(view) {
     bookingsView.style.animation = 'none';
     bookingsView.offsetHeight;
     bookingsView.style.animation = '';
+    if (typeof showCalBar === 'function') showCalBar();
+    if (typeof updateVisibleDay === 'function') updateVisibleDay();
   } else if (view === 'clients') {
     $('navClients').classList.add('active');
     clientsView.offsetHeight;
     clientsView.classList.add('active');
+    if (typeof hideCalBar === 'function') hideCalBar();
     renderClients();
   } else if (view === 'settings') {
     $('navSettings').classList.add('active');
     settingsView.offsetHeight;
     settingsView.classList.add('active');
+    if (typeof hideCalBar === 'function') hideCalBar();
   }
 }
 
@@ -1200,16 +1345,6 @@ for (var _s = 0; _s < _upSlots.length; _s++) {
   });
 }
 
-// Days with bookings this month for calendar dots
-var _bookingDays = {};
-_bookingDays[_d] = true;
-for (var _b = 0; _b < DEMO_UPCOMING.length; _b++) {
-  var _bd = toBangkok(DEMO_UPCOMING[_b].start_time);
-  if (_bd.getMonth() === _m && _bd.getFullYear() === _y) _bookingDays[_bd.getDate()] = true;
-}
-// Add some past days too
-[2,4,6,8,9,11,13,15,16].forEach(function(d) { if (d < _d) _bookingDays[d] = true; });
-
 // Full client list for the clients tab
 var DEMO_CLIENTS_LIST = [
   { name: 'James Wilson', phone: '+66812345678', visits: 14, last: _d + ' Apr' },
@@ -1277,174 +1412,447 @@ async function loadDashboard() {
 
   shopNameEl.textContent = shopName;
   renderStats(todayBookings.length, weekCount, clientCount);
-  renderCalendarView();
+  renderCalendar();
 }
 
 // ── Calendar ──
-var calView = 'daily';
-var calMonth = _m, calYear = _y;
-var calDayDate = new Date(_y, _m, _d);
-var calWeekStart = (function(){ var d = new Date(_y,_m,_d); var w = d.getDay(); d.setDate(d.getDate()-(w===0?6:w-1)); return d; })();
-
-var ROW = 48; // px per hour
-var ROWS = 24;
-var GRID_H = ROWS * ROW;
-var G = 44; // gutter width for time labels
-
 var allBookings = DEMO_TODAY.concat(DEMO_UPCOMING);
 allBookings.forEach(function(b,i){ b._idx = i; if(!b.notes) b.notes=''; });
 
-function bkgsFor(date){ var k=dateKey(date); return allBookings.filter(function(b){ return dateKey(toBangkok(b.start_time))===k; }); }
-function yAt(date){ return (date.getHours()+date.getMinutes()/60)*ROW; }
+function bkgsFor(date){
+  var k = dateKey(date);
+  return allBookings.filter(function(b){ return dateKey(toBangkok(b.start_time)) === k; });
+}
 
-var _L='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 17l-5-5 5-5"/></svg>';
-var _R='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 17l5-5-5-5"/></svg>';
+var _EMPTY_CAL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+var _EMPTY_CLIENTS_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>';
 
-function vtHtml(){
-  return '<div class="cal-view-toggle">' +
-    '<button class="cal-vt-btn'+(calView==='monthly'?' active':'')+'" data-v="monthly">'+t('cal_monthly')+'</button>' +
-    '<button class="cal-vt-btn'+(calView==='weekly'?' active':'')+'" data-v="weekly">'+t('cal_weekly')+'</button>' +
-    '<button class="cal-vt-btn'+(calView==='daily'?' active':'')+'" data-v="daily">'+t('cal_daily')+'</button>' +
+function emptyStateHtml(icon, title, desc) {
+  return '<div class="empty-state">' +
+    '<div class="empty-icon">' + icon + '</div>' +
+    '<div class="empty-title">' + escHtml(title) + '</div>' +
+    '<div class="empty-desc">' + escHtml(desc) + '</div>' +
   '</div>';
 }
 
-function headerHtml(title){
-  return '<div class="cal-header"><div class="cal-title">'+title+'</div>' +
-    '<div class="cal-nav"><button class="cal-nav-btn" id="calP">'+_L+'</button><button class="cal-nav-btn" id="calN">'+_R+'</button></div></div>';
+function measureHeader(){
+  var h = document.querySelector('.header');
+  if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+  var s = document.getElementById('statsStrip');
+  if (s && s.offsetParent !== null && s.offsetHeight > 0) {
+    document.documentElement.style.setProperty('--stats-h', s.offsetHeight + 'px');
+  }
 }
 
-function hourLines(){
-  var h='';
-  for(var hr=0;hr<24;hr++){
-    var y=hr*ROW;
-    if(hr>0) h+='<div class="cal-hour-label" style="top:'+y+'px">'+(hr<10?'0':'')+hr+'</div>';
-    h+='<div class="cal-hour-line" style="top:'+y+'px"></div>';
-    h+='<div class="cal-half-line" style="top:'+(y+ROW/2)+'px"></div>';
+var ROW = 48;          // px per hour
+var ROWS = 24;
+var DAY_H = ROWS * ROW;
+var CAL_RANGE = 14;
+var G = 44;            // gutter for hour labels
+
+var calView = localStorage.getItem('operis_cal_view');
+if (calView !== 'day' && calView !== 'week' && calView !== 'month') calView = 'day';
+
+var calWeekDate = calStartDate();
+var calMonthDate = (function(){ var d = calStartDate(); d.setDate(1); return d; })();
+var _currentDayIdx = 0;
+var _calInitialScrollDone = false;
+
+function calStartDate(){
+  var d = nowBangkok(); d.setHours(0,0,0,0); return d;
+}
+
+function weekStartOf(d){
+  var w = new Date(d); w.setHours(0,0,0,0);
+  var dow = w.getDay();
+  w.setDate(w.getDate() - (dow === 0 ? 6 : dow - 1));
+  return w;
+}
+
+function getDayViewDate(idx){
+  var d = calStartDate(); d.setDate(d.getDate() + idx); return d;
+}
+
+// ── Grid helpers ──
+function hourLinesHtml(dateLabel){
+  var h = '';
+  for (var hr = 0; hr < 24; hr++) {
+    var y = hr * ROW;
+    if (hr === 0 && dateLabel) {
+      h += '<div class="cal-hour-label cal-hour-date" style="top:'+y+'px">'+escHtml(dateLabel)+'</div>';
+    } else if (hr > 0) {
+      h += '<div class="cal-hour-label" style="top:'+y+'px">'+(hr<10?'0'+hr:hr)+':00</div>';
+    }
+    h += '<div class="cal-hour-line" style="top:'+y+'px"></div>';
+    h += '<div class="cal-half-line" style="top:'+(y+ROW/2)+'px"></div>';
   }
   return h;
 }
 
-function nowLine(colStyle){
-  var n=nowBangkok(), hr=n.getHours(), mn=n.getMinutes();
-  var y=(hr+mn/60)*ROW;
-  return '<div class="cal-now" style="top:'+y+'px;'+(colStyle||'')+'"></div>';
+function formatDayLabel(date){
+  var s = S();
+  return date.getDate() + ' ' + s.months[date.getMonth()];
 }
 
-function blockHtml(b,extra){
-  var bk=toBangkok(b.start_time), dur=b.services?b.services.duration_min:60;
-  var top=yAt(bk), h=Math.max((dur/60)*ROW,22);
-  var sc=h>=36, tc=h>=52;
-  return '<div class="cal-block" style="top:'+top+'px;height:'+h+'px;'+(extra||'')+'" data-idx="'+b._idx+'">' +
+function nowLineHtml(extraStyle){
+  var n = nowBangkok();
+  var y = (n.getHours() + n.getMinutes()/60) * ROW;
+  return '<div class="cal-now" style="top:'+y+'px'+(extraStyle||'')+'"></div>';
+}
+
+function blockHtml(b, posStyle){
+  var bk = toBangkok(b.start_time);
+  var dur = b.services ? b.services.duration_min : 60;
+  var top = (bk.getHours() + bk.getMinutes()/60) * ROW;
+  var h = Math.max((dur/60)*ROW, 22);
+  var sc = h >= 36, tc = h >= 52;
+  return '<div class="cal-block" style="top:'+top+'px;height:'+h+'px'+(posStyle||'')+'" data-idx="'+b._idx+'">' +
     '<div class="cal-block-service">'+escHtml(b.services.name)+'</div>' +
-    (sc?'<div class="cal-block-client">'+escHtml(b.clients.name)+'</div>':'') +
-    (tc?'<div class="cal-block-time">'+formatTime(bk)+'–'+formatTime(addMinutes(bk,dur))+'</div>':'') +
+    (sc ? '<div class="cal-block-client">'+escHtml(b.clients.name)+'</div>' : '') +
+    (tc ? '<div class="cal-block-time">'+formatTime(bk)+'–'+formatTime(addMinutes(bk,dur))+'</div>' : '') +
   '</div>';
 }
 
-function wireVT(){ calendarSection.querySelectorAll('.cal-vt-btn').forEach(function(b){ b.addEventListener('click',function(){ calView=b.dataset.v; renderCalendarView(); }); }); }
-function wireBlocks(){ calendarSection.querySelectorAll('.cal-block').forEach(function(el){ el.addEventListener('click',function(){ openEditForm(allBookings[parseInt(el.dataset.idx)]); }); }); }
-
-function scrollTT(fallbackHr){
-  var tt=calendarSection.querySelector('.cal-timetable'); if(!tt) return;
-  var nl=tt.querySelector('.cal-now');
-  if(nl) tt.scrollTop=parseInt(nl.style.top)-80;
-  else tt.scrollTop=Math.max(0,(fallbackHr||8)*ROW-20);
+// ── Title builders (single-line, with Buddhist year when TH) ──
+function dayTitleText(date){
+  var s = S();
+  var yr = s.use_buddhist ? date.getFullYear()+543 : date.getFullYear();
+  return s.days_short[date.getDay()] + ' ' + date.getDate() + ' ' + s.months[date.getMonth()] + ' ' + yr;
 }
 
-// Monthly
-function renderMonth(){
-  var s=S(), td=_d, tm=_m, ty=_y;
-  var first=new Date(calYear,calMonth,1), dow=first.getDay();
-  var dim=new Date(calYear,calMonth+1,0).getDate(), pdim=new Date(calYear,calMonth,0).getDate();
-  var yr=s.use_buddhist?calYear+543:calYear;
-
-  var h=vtHtml()+headerHtml(s.months_full[calMonth]+' '+yr);
-  h+='<div class="month-grid">';
-  var ord=[1,2,3,4,5,6,0];
-  for(var d=0;d<7;d++) h+='<div class="month-dow">'+s.days_short[ord[d]]+'</div>';
-  var adj=dow===0?6:dow-1;
-  for(var p=adj-1;p>=0;p--) h+='<div class="month-day other">'+(pdim-p)+'</div>';
-  for(var i=1;i<=dim;i++){
-    var c='month-day';
-    if(i===td&&calMonth===tm&&calYear===ty) c+=' today';
-    if(calMonth===tm&&calYear===ty&&_bookingDays[i]) c+=' has-booking';
-    h+='<div class="'+c+'">'+i+'</div>';
+function weekTitleText(start, end){
+  var s = S();
+  var yr = s.use_buddhist ? end.getFullYear()+543 : end.getFullYear();
+  if (start.getMonth() === end.getMonth()) {
+    return start.getDate() + ' – ' + end.getDate() + ' ' + s.months[end.getMonth()] + ' ' + yr;
   }
-  var tot=adj+dim, rem=tot%7===0?0:7-tot%7;
-  for(var n=1;n<=rem;n++) h+='<div class="month-day other">'+n+'</div>';
-  h+='</div>';
-
-  calendarSection.innerHTML=h;
-  $('calP').addEventListener('click',function(){ calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendarView(); });
-  $('calN').addEventListener('click',function(){ calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendarView(); });
-  wireVT();
+  return start.getDate() + ' ' + s.months[start.getMonth()] + ' – ' + end.getDate() + ' ' + s.months[end.getMonth()] + ' ' + yr;
 }
 
-// Daily
-function renderDay(){
-  var s=S(), d=calDayDate;
-  var yr=s.use_buddhist?d.getFullYear()+543:d.getFullYear();
-  var title=s.days[d.getDay()]+'<span class="cal-title-sub">'+d.getDate()+' '+s.months[d.getMonth()]+' '+yr+'</span>';
-  var bks=bkgsFor(d);
-
-  var h=vtHtml()+headerHtml(title);
-  h+='<div class="cal-timetable"><div class="cal-tt-inner" style="height:'+GRID_H+'px">';
-  h+=hourLines();
-  var n=nowBangkok(); if(dateKey(n)===dateKey(d)) h+=nowLine();
-  for(var i=0;i<bks.length;i++) h+=blockHtml(bks[i]);
-  h+='</div></div>';
-
-  calendarSection.innerHTML=h;
-  $('calP').addEventListener('click',function(){ calDayDate=new Date(calDayDate); calDayDate.setDate(calDayDate.getDate()-1); renderCalendarView(); });
-  $('calN').addEventListener('click',function(){ calDayDate=new Date(calDayDate); calDayDate.setDate(calDayDate.getDate()+1); renderCalendarView(); });
-  wireVT(); wireBlocks();
-  scrollTT(bks.length?toBangkok(bks[0].start_time).getHours()-1:8);
+function monthTitleText(date){
+  var s = S();
+  var yr = s.use_buddhist ? date.getFullYear()+543 : date.getFullYear();
+  return s.months[date.getMonth()] + ' ' + yr;
 }
 
-// Weekly
-function renderWeek(){
-  var s=S(), mon=new Date(calWeekStart), n=nowBangkok(), tk=dateKey(n);
-  var sun=new Date(mon); sun.setDate(sun.getDate()+6);
-  var yr=s.use_buddhist?mon.getFullYear()+543:mon.getFullYear();
-  var title=mon.getDate()+' – '+sun.getDate()+' '+s.months[sun.getMonth()]+' '+yr;
-
-  var h=vtHtml()+headerHtml(title);
-  // Column headers
-  h+='<div class="wk-header"><div class="wk-hcell"></div>';
-  var ord=[1,2,3,4,5,6,0];
-  for(var c=0;c<7;c++){
-    var cd=new Date(mon); cd.setDate(cd.getDate()+c);
-    h+='<div class="wk-hcell'+(dateKey(cd)===tk?' is-today':'')+'">'+s.days_short[ord[c]]+'<span class="wk-hcell-num">'+cd.getDate()+'</span></div>';
+function computeBarState(){
+  var title, showToday;
+  if (calView === 'day') {
+    title = dayTitleText(getDayViewDate(_currentDayIdx));
+    showToday = _currentDayIdx > 0;
+  } else if (calView === 'week') {
+    var ws = weekStartOf(calWeekDate);
+    var we = new Date(ws); we.setDate(we.getDate() + 6);
+    title = weekTitleText(ws, we);
+    showToday = dateKey(ws) !== dateKey(weekStartOf(nowBangkok()));
+  } else {
+    title = monthTitleText(calMonthDate);
+    var td = nowBangkok();
+    showToday = calMonthDate.getFullYear() !== td.getFullYear() || calMonthDate.getMonth() !== td.getMonth();
   }
-  h+='</div>';
+  return { title: title, showToday: showToday };
+}
 
-  h+='<div class="cal-timetable"><div class="cal-tt-inner" style="height:'+GRID_H+'px">';
-  h+='<div class="wk-cols">'; for(var v=0;v<7;v++) h+='<div class="wk-col"></div>'; h+='</div>';
-  h+=hourLines();
+// ── Content builders ──
+function buildDayContent(){
+  var start = calStartDate();
+  var todayKey = dateKey(nowBangkok());
+  var h = '<div class="cal-days" id="calDays">';
+  for (var i = 0; i < CAL_RANGE; i++) {
+    var d = new Date(start); d.setDate(d.getDate() + i);
+    var dk = dateKey(d);
+    var bks = bkgsFor(d);
+    h += '<div class="cal-day" data-idx="'+i+'" style="height:'+DAY_H+'px">';
+    h += hourLinesHtml(i > 0 ? formatDayLabel(d) : null);
+    if (dk === todayKey) h += nowLineHtml();
+    for (var bi = 0; bi < bks.length; bi++) h += blockHtml(bks[bi]);
+    h += '</div>';
+  }
+  h += '</div>';
+  return h;
+}
 
-  // Now line in correct column
-  for(var nc=0;nc<7;nc++){
-    var ncd=new Date(mon); ncd.setDate(ncd.getDate()+nc);
-    if(dateKey(ncd)===tk){
-      h+=nowLine('left:calc('+G+'px + '+nc+' * ((100% - '+G+'px) / 7));width:calc((100% - '+G+'px) / 7)');
+function buildWeekContent(){
+  var s = S();
+  var ws = weekStartOf(calWeekDate);
+  var todayKey = dateKey(nowBangkok());
+
+  var h = '<div class="cal-week-header">';
+  h += '<div class="cal-week-hcell"></div>';
+  for (var dc = 0; dc < 7; dc++) {
+    var cd = new Date(ws); cd.setDate(cd.getDate() + dc);
+    var isToday = dateKey(cd) === todayKey;
+    h += '<div class="cal-week-hcell'+(isToday?' is-today':'')+'">'+s.days_short[cd.getDay()]+
+      '<span class="cal-week-hnum">'+cd.getDate()+'</span></div>';
+  }
+  h += '</div>';
+
+  h += '<div class="cal-week-body" style="height:'+DAY_H+'px">';
+  h += '<div class="cal-week-cols">';
+  for (var cc = 0; cc < 7; cc++) h += '<div class="cal-week-col"></div>';
+  h += '</div>';
+  h += hourLinesHtml();
+
+  for (var nc = 0; nc < 7; nc++) {
+    var ncd = new Date(ws); ncd.setDate(ncd.getDate() + nc);
+    if (dateKey(ncd) === todayKey) {
+      h += nowLineHtml(';left:calc('+G+'px + '+nc+' * ((100% - '+G+'px) / 7));width:calc((100% - '+G+'px) / 7)');
       break;
     }
   }
 
-  // Blocks
-  for(var dc=0;dc<7;dc++){
-    var dd=new Date(mon); dd.setDate(dd.getDate()+dc);
-    var db=bkgsFor(dd);
-    var cs='left:calc('+G+'px + '+dc+' * ((100% - '+G+'px) / 7) + 1px);width:calc((100% - '+G+'px) / 7 - 2px);right:auto;';
-    for(var bi=0;bi<db.length;bi++) h+=blockHtml(db[bi],cs);
+  for (var dci = 0; dci < 7; dci++) {
+    var dd = new Date(ws); dd.setDate(dd.getDate() + dci);
+    var db = bkgsFor(dd);
+    var colStyle = ';left:calc('+G+'px + '+dci+' * ((100% - '+G+'px) / 7) + 1px);width:calc((100% - '+G+'px) / 7 - 2px);right:auto';
+    for (var bii = 0; bii < db.length; bii++) h += blockHtml(db[bii], colStyle);
   }
 
-  h+='</div></div>';
-  calendarSection.innerHTML=h;
-  $('calP').addEventListener('click',function(){ calWeekStart=new Date(calWeekStart); calWeekStart.setDate(calWeekStart.getDate()-7); renderCalendarView(); });
-  $('calN').addEventListener('click',function(){ calWeekStart=new Date(calWeekStart); calWeekStart.setDate(calWeekStart.getDate()+7); renderCalendarView(); });
-  wireVT(); wireBlocks(); scrollTT(8);
+  h += '</div>';
+  return h;
 }
+
+function buildMonthContent(){
+  var s = S();
+  var md = calMonthDate;
+  var year = md.getFullYear(), month = md.getMonth();
+  var todayKey = dateKey(nowBangkok());
+  var first = new Date(year, month, 1);
+  var dim = new Date(year, month+1, 0).getDate();
+  var pdim = new Date(year, month, 0).getDate();
+  var dow = first.getDay();
+  var adj = (dow === 0 ? 6 : dow - 1);
+
+  var h = '<div class="cal-month-grid">';
+  var ord = [1,2,3,4,5,6,0];
+  for (var di = 0; di < 7; di++) h += '<div class="cal-month-dow">'+s.days_short[ord[di]]+'</div>';
+  for (var p = adj - 1; p >= 0; p--) h += '<div class="cal-month-day other">'+(pdim - p)+'</div>';
+  for (var dd = 1; dd <= dim; dd++) {
+    var dObj = new Date(year, month, dd);
+    var count = bkgsFor(dObj).length;
+    var classes = 'cal-month-day';
+    if (dateKey(dObj) === todayKey) classes += ' today';
+    h += '<div class="'+classes+'" data-date="'+dateKey(dObj)+'">' +
+      '<div>'+dd+'</div>' +
+      (count > 0 ? '<div class="cal-month-count">'+count+'</div>' : '') +
+    '</div>';
+  }
+  var tot = adj + dim;
+  var rem = tot % 7 === 0 ? 0 : 7 - (tot % 7);
+  for (var ni = 1; ni <= rem; ni++) h += '<div class="cal-month-day other">'+ni+'</div>';
+  h += '</div>';
+  return h;
+}
+
+// ── Main render: builds calendar CONTENT only; the fixed bar is static markup ──
+function renderCalendar(){
+  var start = calStartDate();
+  var total = 0;
+  for (var ci = 0; ci < CAL_RANGE; ci++) {
+    var cd = new Date(start); cd.setDate(cd.getDate() + ci);
+    total += bkgsFor(cd).length;
+  }
+  if (total === 0 && calView === 'day') {
+    calendarSection.innerHTML = emptyStateHtml(_EMPTY_CAL_ICON, t('empty_timeline_title'), t('empty_timeline_desc'));
+    hideCalBar();
+    return;
+  }
+  showCalBar();
+
+  if (calView === 'day') _calInitialScrollDone = false;
+
+  var h = '<div class="cal-content">';
+  if (calView === 'day') h += buildDayContent();
+  else if (calView === 'week') h += buildWeekContent();
+  else h += buildMonthContent();
+  h += '</div>';
+
+  calendarSection.innerHTML = h;
+
+  // Wire content-only events (blocks + month cells)
+  calendarSection.querySelectorAll('.cal-block').forEach(function(el){
+    el.addEventListener('click', function(){
+      openEditForm(allBookings[parseInt(el.dataset.idx)]);
+    });
+  });
+  if (calView === 'month') {
+    calendarSection.querySelectorAll('.cal-month-day:not(.other)').forEach(function(el){
+      el.addEventListener('click', function(){
+        var dk = el.dataset.date;
+        if (!dk) return;
+        var parts = dk.split('-');
+        calWeekDate = new Date(+parts[0], +parts[1]-1, +parts[2]);
+        setCalView('week');
+      });
+    });
+  }
+
+  measureHeader();
+  measureCalBar();
+  if (calView === 'day') _currentDayIdx = 0;
+  updateBarState();
+
+  if (calView === 'day') {
+    requestAnimationFrame(function(){
+      if (!_calInitialScrollDone) {
+        var day0 = calendarSection.querySelector('.cal-day[data-idx="0"]');
+        if (day0) {
+          var n = nowBangkok();
+          var nowY = (n.getHours() + n.getMinutes()/60) * ROW;
+          var day0Abs = day0.getBoundingClientRect().top + window.scrollY;
+          var target = day0Abs + nowY - stickyOffset() - 80;
+          window.scrollTo(0, Math.max(0, target));
+          _calInitialScrollDone = true;
+        }
+      }
+      updateVisibleDay();
+    });
+  }
+}
+
+function showCalBar(){
+  var bar = document.getElementById('calFixedBar');
+  if (!bar) return;
+  bar.hidden = false;
+  measureCalBar();
+}
+
+function hideCalBar(){
+  var bar = document.getElementById('calFixedBar');
+  if (bar) bar.hidden = true;
+  document.documentElement.style.setProperty('--cal-bar-h', '0px');
+}
+
+// One-time wiring of the static fixed bar
+function initCalBarEvents(){
+  var prev = $('calPrev'), next = $('calNext');
+  if (prev) prev.addEventListener('click', function(){ onNavClick(-1); });
+  if (next) next.addEventListener('click', function(){ onNavClick(1); });
+
+  var today = $('calToday');
+  if (today) today.addEventListener('click', onTodayClick);
+
+  var toggle = $('calViewToggle');
+  if (toggle) toggle.addEventListener('click', function(e){
+    var btn = e.target.closest('.cal-vt-btn');
+    if (btn) setCalView(btn.dataset.v);
+  });
+}
+
+function onNavClick(dir){
+  if (calView === 'day') {
+    jumpToDay(_currentDayIdx + dir);
+  } else if (calView === 'week') {
+    calWeekDate = weekStartOf(calWeekDate);
+    calWeekDate.setDate(calWeekDate.getDate() + dir * 7);
+    renderCalendar();
+  } else {
+    calMonthDate = new Date(calMonthDate);
+    calMonthDate.setMonth(calMonthDate.getMonth() + dir);
+    renderCalendar();
+  }
+}
+
+function onTodayClick(){
+  if (calView === 'day') {
+    jumpToDay(0);
+  } else if (calView === 'week') {
+    calWeekDate = calStartDate();
+    renderCalendar();
+  } else {
+    var m = calStartDate(); m.setDate(1);
+    calMonthDate = m;
+    renderCalendar();
+  }
+}
+
+function setCalView(v){
+  if (v === calView) return;
+  calView = v;
+  try { localStorage.setItem('operis_cal_view', v); } catch(e) {}
+  if (v !== 'day') window.scrollTo(0, 0);
+  renderCalendar();
+}
+
+function measureCalBar(){
+  var bar = document.getElementById('calFixedBar');
+  if (bar) document.documentElement.style.setProperty('--cal-bar-h', bar.offsetHeight + 'px');
+}
+
+function stickyOffset(){
+  var headerH = document.querySelector('.header').offsetHeight;
+  var stats = document.getElementById('statsStrip');
+  var statsH = (stats && stats.offsetParent !== null) ? stats.offsetHeight : 0;
+  var bar = document.getElementById('calFixedBar');
+  var barH = (bar && !bar.hidden) ? bar.offsetHeight : 0;
+  return headerH + statsH + barH;
+}
+
+function jumpToDay(idx){
+  if (idx < 0 || idx >= CAL_RANGE) return;
+  var day = calendarSection.querySelector('.cal-day[data-idx="'+idx+'"]');
+  if (!day) return;
+  var target = day.getBoundingClientRect().top + window.scrollY - stickyOffset() - 2;
+  window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+}
+
+function updateNavButtons(){
+  var prev = $('calPrev'), next = $('calNext');
+  if (!prev || !next) return;
+  if (calView === 'day') {
+    prev.toggleAttribute('disabled', _currentDayIdx <= 0);
+    next.toggleAttribute('disabled', _currentDayIdx >= CAL_RANGE - 1);
+  } else {
+    prev.removeAttribute('disabled');
+    next.removeAttribute('disabled');
+  }
+}
+
+function updateBarState(){
+  var title = $('calDateTitle');
+  var today = $('calToday');
+  if (!title || !today) return;
+  var state = computeBarState();
+  title.textContent = state.title;
+  today.hidden = !state.showToday;
+  // Sync active toggle button
+  var toggle = $('calViewToggle');
+  if (toggle) {
+    toggle.querySelectorAll('.cal-vt-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.v === calView);
+    });
+  }
+  updateNavButtons();
+}
+
+function updateVisibleDay(){
+  if (calView !== 'day') return;
+  var days = calendarSection.querySelectorAll('.cal-day');
+  if (!days.length) return;
+  var bar = document.getElementById('calFixedBar');
+  if (!bar || bar.hidden) return;
+  var threshold = stickyOffset() + 8;
+  var newIdx = 0;
+  for (var i = 0; i < days.length; i++) {
+    var top = days[i].getBoundingClientRect().top;
+    if (top <= threshold) newIdx = i;
+    else break;
+  }
+  if (newIdx !== _currentDayIdx) {
+    _currentDayIdx = newIdx;
+    updateBarState();
+  }
+}
+
+var _scrollRaf = null;
+function onScrollCal(){
+  if (_scrollRaf) return;
+  _scrollRaf = requestAnimationFrame(function(){
+    _scrollRaf = null;
+    updateVisibleDay();
+  });
+}
+window.addEventListener('scroll', onScrollCal, { passive: true });
 
 // Edit
 var _editing=null;
@@ -1458,24 +1866,50 @@ function openEditForm(b){
   $('calEditOverlay').classList.add('open');
 }
 function closeEdit(){ $('calEditOverlay').classList.remove('open'); _editing=null; }
-function saveEdit(){
-  if(!_editing) return;
-  var dv=$('calEditDate').value.split('-'), tv=$('calEditTime').value.split(':');
-  _editing.start_time=bkkToUtc(+dv[0],dv[1]-1,+dv[2],+tv[0],+tv[1]);
-  if(_editing.services) _editing.services.name=$('calEditService').value;
-  _editing.notes=$('calEditNotes').value;
-  closeEdit(); renderCalendarView();
+
+async function autoSave(){
+  if (!_editing) return;
+  var dateVal = $('calEditDate').value;
+  var timeVal = $('calEditTime').value;
+  if (!dateVal || !timeVal) return;
+  var dv = dateVal.split('-');
+  var tv = timeVal.split(':');
+  if (dv.length !== 3 || tv.length !== 2) return;
+
+  var newStart = bkkToUtc(+dv[0], dv[1]-1, +dv[2], +tv[0], +tv[1]);
+  var newService = $('calEditService').value;
+  var newNotes = $('calEditNotes').value;
+
+  _editing.start_time = newStart;
+  _editing.notes = newNotes;
+  if (_editing.services) _editing.services.name = newService;
+
+  renderCalendar();
+
+  if (_editing.id) {
+    try {
+      var res = await supabase
+        .from('bookings')
+        .update({ start_time: newStart, notes: newNotes })
+        .eq('id', _editing.id);
+      if (res.error) throw res.error;
+    } catch (e) {
+      console.error('Auto-save failed', e);
+      showToast(t('error_save'), 2000);
+      return;
+    }
+  }
+
+  showToast(t('saved'), 1000);
 }
 
-$('calEditCancel').addEventListener('click',closeEdit);
-$('calEditSave').addEventListener('click',saveEdit);
-$('calEditOverlay').addEventListener('click',function(e){ if(e.target===this) closeEdit(); });
+['calEditService', 'calEditDate', 'calEditTime', 'calEditNotes'].forEach(function(id){
+  var el = $(id);
+  if (el) el.addEventListener('change', autoSave);
+});
 
-function renderCalendarView(){
-  if(calView==='monthly') renderMonth();
-  else if(calView==='weekly') renderWeek();
-  else renderDay();
-}
+$('calEditCancel').addEventListener('click', closeEdit);
+$('calEditOverlay').addEventListener('click', function(e){ if (e.target === this) closeEdit(); });
 
 // ── Clients ──
 function getInitials(name) {
@@ -1496,17 +1930,22 @@ function renderClients(filter) {
   }
 
   var html = '<input class="clients-search" type="text" id="clientSearch" placeholder="' + t('search_clients') + '" value="' + escHtml(filter || '') + '">';
-  html += '<div class="clients-count">' + list.length + ' ' + t('nav_clients').toLowerCase() + '</div>';
 
-  for (var i = 0; i < list.length; i++) {
-    var c = list[i];
-    html += '<div class="client-row">' +
-      '<div class="client-avatar">' + getInitials(c.name) + '</div>' +
-      '<div class="client-info">' +
-        '<div class="client-name">' + escHtml(c.name) + '</div>' +
-        '<div class="client-meta"><span>' + c.visits + ' ' + t('client_visits') + '</span><span>' + c.last + '</span></div>' +
-      '</div>' +
-      '<a class="client-phone-btn" href="tel:' + c.phone + '">' + phoneSvg + '</a></div>';
+  if (list.length === 0) {
+    html += emptyStateHtml(_EMPTY_CLIENTS_ICON, t('empty_clients_title'), t('empty_clients_desc'));
+  } else {
+    html += '<div class="clients-count">' + list.length + ' ' + t('nav_clients').toLowerCase() + '</div>';
+
+    for (var i = 0; i < list.length; i++) {
+      var c = list[i];
+      html += '<div class="client-row">' +
+        '<div class="client-avatar">' + getInitials(c.name) + '</div>' +
+        '<div class="client-info">' +
+          '<div class="client-name">' + escHtml(c.name) + '</div>' +
+          '<div class="client-meta"><span>' + c.visits + ' ' + t('client_visits') + '</span><span>' + c.last + '</span></div>' +
+        '</div>' +
+        '<a class="client-phone-btn" href="tel:' + c.phone + '">' + phoneSvg + '</a></div>';
+    }
   }
 
   clientsView.innerHTML = html;
@@ -1542,7 +1981,13 @@ applyTheme();
 syncSegControl($('langControl'), currentLang);
 syncSegControl($('themeControl'), currentTheme);
 applyI18n();
-renderCalendarView();
+measureHeader();
+window.addEventListener('resize', function(){
+  measureHeader();
+  if (typeof measureCalBar === 'function') measureCalBar();
+});
+initCalBarEvents();
+renderCalendar();
 loadDashboard();
 </script>
 </body>
