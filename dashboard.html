@@ -394,8 +394,8 @@
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 0 16px 4px;
-    margin: 0 -16px 24px;
+    padding: 0 0 4px;
+    margin: 0 0 24px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -542,6 +542,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    gap: 12px;
     margin-bottom: 18px;
   }
 
@@ -552,6 +553,9 @@
     color: var(--text);
     line-height: 1;
     letter-spacing: -0.02em;
+    white-space: nowrap;
+    min-width: 0;
+    flex-shrink: 1;
   }
 
   .revenue-period {
@@ -559,6 +563,8 @@
     font-size: 13px;
     color: var(--text-muted);
     font-weight: 400;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .revenue-chart {
@@ -1753,11 +1759,15 @@
     .service-card { min-height: 64px; }
     .client-card-row { min-height: 60px; }
 
-    /* Month view: shrink count label so it fits in narrow cells */
+    /* Month view: tighter layout so narrow cells don't overflow */
+    .cal-month-grid { gap: 1px; padding: 4px 0; }
+    .cal-month-dow { font-size: 10px; padding: 6px 4px; text-align: center; }
+    .cal-month-day { font-size: 12px; padding: 4px; }
     .cal-month-count {
-      font-size: 10px;
+      font-size: 9px;
       white-space: nowrap;
       overflow: hidden;
+      text-overflow: clip;
       max-width: 100%;
     }
 
@@ -2314,15 +2324,23 @@ function formatMoney(priceCents) {
   var baht = (priceCents || 0) / 100;
   if (currentCurrency === 'USD') {
     var usd = baht / USD_RATE;
-    return '$' + usd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    return '$ ' + usd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
   }
-  return '฿' + Math.round(baht).toLocaleString('en-US');
+  return '฿ ' + Math.round(baht).toLocaleString('en-US');
 }
 
 function bookingsLabel(count) {
   if (count <= 0) return '';
   if (currentLang === 'th') return count + ' นัดหมาย';
   return count + (count === 1 ? ' booking' : ' bookings');
+}
+
+// Returns the service name in the active language. If the row has name_en
+// and the UI is English, use it; otherwise fall back to name.
+function svcLabel(svc) {
+  if (!svc) return '—';
+  if (currentLang === 'en' && svc.name_en) return svc.name_en;
+  return svc.name || '—';
 }
 
 // ── Theme ──
@@ -2509,12 +2527,12 @@ function bkkToUtc(y,m,d,h,min) {
 var DEMO_SHOP_NAME = 'ร้านตัดผม The Cut';
 
 var DEMO_SERVICES = [
-  { id: 'demo-svc-1', business_id: BUSINESS_ID, name: 'ตัดผมชาย',        duration_min: 30, price_cents: 35000,  is_active: true },
-  { id: 'demo-svc-2', business_id: BUSINESS_ID, name: 'ตัดผมหญิง',       duration_min: 45, price_cents: 50000,  is_active: true },
-  { id: 'demo-svc-3', business_id: BUSINESS_ID, name: 'โกนหนวด',         duration_min: 20, price_cents: 20000,  is_active: true },
-  { id: 'demo-svc-4', business_id: BUSINESS_ID, name: 'ตัดผม + โกนหนวด',  duration_min: 50, price_cents: 50000,  is_active: true },
-  { id: 'demo-svc-5', business_id: BUSINESS_ID, name: 'ทำสีผม',          duration_min: 90, price_cents: 120000, is_active: true },
-  { id: 'demo-svc-6', business_id: BUSINESS_ID, name: 'ทรีทเมนต์',        duration_min: 60, price_cents: 80000,  is_active: true },
+  { id: 'demo-svc-1', business_id: BUSINESS_ID, name: 'ตัดผมชาย',        name_en: "Men's Haircut",    duration_min: 30, price_cents: 35000,  is_active: true },
+  { id: 'demo-svc-2', business_id: BUSINESS_ID, name: 'ตัดผมหญิง',       name_en: "Women's Haircut",  duration_min: 45, price_cents: 50000,  is_active: true },
+  { id: 'demo-svc-3', business_id: BUSINESS_ID, name: 'โกนหนวด',         name_en: 'Shave',            duration_min: 20, price_cents: 20000,  is_active: true },
+  { id: 'demo-svc-4', business_id: BUSINESS_ID, name: 'ตัดผม + โกนหนวด',  name_en: 'Cut + Shave',      duration_min: 50, price_cents: 50000,  is_active: true },
+  { id: 'demo-svc-5', business_id: BUSINESS_ID, name: 'ทำสีผม',          name_en: 'Hair Color',       duration_min: 90, price_cents: 120000, is_active: true },
+  { id: 'demo-svc-6', business_id: BUSINESS_ID, name: 'ทรีทเมนต์',        name_en: 'Treatment',        duration_min: 60, price_cents: 80000,  is_active: true },
 ];
 
 var DEMO_CLIENTS = [
@@ -2859,7 +2877,7 @@ function blockHtml(b, posStyle){
   var h = Math.max((dur/60)*ROW, 50);
   // Time is only shown when the block is comfortably tall
   var showTime = h >= 70;
-  var svcName = (b.services && b.services.name) || '—';
+  var svcName = svcLabel(b.services);
   var cliName = (b.clients && b.clients.name) || '—';
   return '<div class="cal-block" style="top:'+top+'px;height:'+h+'px'+(posStyle||'')+'" data-idx="'+b._idx+'">' +
     '<div class="cal-block-service">'+escHtml(svcName)+'</div>' +
@@ -3227,11 +3245,11 @@ function populateServiceDropdown(selectedId) {
   var html = '<option value="">—</option>';
   for (var i = 0; i < options.length; i++) {
     var svc = options[i];
-    html += '<option value="' + escHtml(svc.id) + '"' + (String(svc.id) === String(selectedId) ? ' selected' : '') + '>' + escHtml(svc.name || '—') + '</option>';
+    html += '<option value="' + escHtml(svc.id) + '"' + (String(svc.id) === String(selectedId) ? ' selected' : '') + '>' + escHtml(svcLabel(svc)) + '</option>';
   }
   // If the booking references a service not in the current _services list (demo/missing), append it
   if (selectedId && !options.some(function(s){ return String(s.id) === String(selectedId); }) && _editing && _editing.services) {
-    html += '<option value="' + escHtml(selectedId) + '" selected>' + escHtml(_editing.services.name || '—') + '</option>';
+    html += '<option value="' + escHtml(selectedId) + '" selected>' + escHtml(svcLabel(_editing.services)) + '</option>';
   }
   sel.innerHTML = html;
 }
@@ -3307,7 +3325,7 @@ function wireBookingBlurSaves() {
     var svcId = $('calEditService').value || null;
     var svcObj = (_services || []).find(function(s){ return String(s.id) === String(svcId); });
     // Update locally so the calendar block reflects the new service name & duration
-    if (svcObj) _editing.services = { id: svcObj.id, name: svcObj.name, duration_min: svcObj.duration_min, price_cents: svcObj.price_cents };
+    if (svcObj) _editing.services = { id: svcObj.id, name: svcObj.name, name_en: svcObj.name_en, duration_min: svcObj.duration_min, price_cents: svcObj.price_cents };
     saveBookingPatch({ service_id: svcId });
   });
 
@@ -3555,7 +3573,7 @@ function paintClientDetail(host, clientId, bookings) {
     for (var i = 0; i < bookings.length; i++) {
       var b = bookings[i];
       var bk = toBangkok(b.start_time);
-      var svc = b.services ? (b.services.name || '—') : '—';
+      var svc = svcLabel(b.services);
       var status = b.status || 'pending';
       var statusKey = 'status_' + status;
       var statusLabel = STRINGS[currentLang][statusKey] || status;
@@ -3689,7 +3707,7 @@ function paintServicesList() {
       var dur = s.duration_min || 0;
       html += '<div class="service-card' + (active ? '' : ' inactive') + '" data-id="' + escHtml(s.id) + '">' +
         '<div class="service-main">' +
-          '<div class="service-name">' + escHtml(s.name || '—') + '</div>' +
+          '<div class="service-name">' + escHtml(svcLabel(s)) + '</div>' +
           '<div class="service-meta"><span>' + dur + ' ' + escHtml(t('min_unit')) + '</span></div>' +
         '</div>' +
         '<div class="service-price">' + escHtml(formatMoney(s.price_cents)) + '</div>' +
@@ -3995,7 +4013,7 @@ function renderAIActivity() {
     var b = list[i];
     var bk = toBangkok(b.start_time);
     var eventTime = b.created_at ? toBangkok(b.created_at) : bk;
-    var service = b.services ? b.services.name : '—';
+    var service = svcLabel(b.services);
     var client = b.clients ? b.clients.name : '—';
     html += '<div class="activity-item">' +
       '<div class="activity-badge">AI</div>' +
