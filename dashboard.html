@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Sarabun:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { height: 100%; }
+  html { height: 100%; overflow-x: hidden; }
 
   /* Theme variables — light (default) */
   :root {
@@ -59,6 +59,7 @@
     flex-direction: column;
     align-items: stretch;
     padding: 0 0 84px;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     transition: background 0.15s, color 0.15s;
   }
@@ -72,8 +73,8 @@
 
   .container {
     width: 100%;
-    max-width: 440px;
-    padding: 0 18px;
+    max-width: 100%;
+    padding: 0 16px;
     margin: 0 auto;
     flex: 1;
     display: flex;
@@ -176,7 +177,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 28px 0 20px;
+    padding: 24px 16px 16px;
     background: var(--bg);
     transition: background 0.15s;
   }
@@ -393,8 +394,8 @@
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 0 18px 4px;
-    margin: 0 -18px 24px;
+    padding: 0 16px 4px;
+    margin: 0 -16px 24px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -982,7 +983,7 @@
   }
 
   .bottom-nav-inner {
-    width: 100%; max-width: 440px;
+    width: 100%; max-width: 100%;
     display: flex; padding: 0 12px;
   }
 
@@ -1708,13 +1709,6 @@
     padding: 0 0 12px;
   }
 
-  /* ── Mobile-only: small phones ── */
-  @media (max-width: 375px) {
-    .container { padding: 0 16px; }
-    .stat-number { font-size: 40px; }
-    .stat-box { min-width: 80%; }
-  }
-
   /* Calendar self-scroll container */
   .cal-scroll {
     position: relative;
@@ -1724,10 +1718,67 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* ── Mobile layout (below 768px) ── */
   @media (max-width: 767px) {
+    /* Mobile typography */
+    .stat-number { font-size: 32px; }
+    .card-title { font-size: 16px; }
+    .page-title { font-size: 20px; }
+
+    /* Stats horizontal-scroll card width */
+    .stat-box { min-width: 78%; }
+
+    /* Calendar card: no inner padding, flush with container gutters */
     .cal-fixed-inner { padding: 14px 16px; }
     .card-calendar { padding: 0; }
     .card-calendar .cal-scroll { padding: 0 0 12px; }
+
+    /* Grid rows stack in a single column on mobile (default is 1fr, be explicit) */
+    .grid-row-analytics,
+    .grid-row-calendar { grid-template-columns: 1fr; }
+
+    /* Tap targets ≥ 44px */
+    .btn-refresh { width: 44px; height: 44px; }
+    .profile-avatar { width: 44px; height: 44px; }
+    .cal-nav-btn { width: 44px; height: 44px; }
+    .cal-today-btn { min-height: 44px; padding: 8px 16px; }
+    .cal-vt-btn { min-height: 44px; }
+    .client-phone-btn { width: 44px; height: 44px; }
+    .client-edit-pencil { width: 44px; height: 44px; }
+    .profile-panel-close { width: 44px; height: 44px; }
+    .cal-edit-close { width: 44px; height: 44px; top: 10px; right: 10px; }
+    .card-link-bottom { min-height: 48px; display: flex; align-items: center; }
+    .seg-btn { min-height: 40px; padding: 8px 14px; }
+    .btn-add-service { min-height: 44px; }
+    .service-card { min-height: 64px; }
+    .client-card-row { min-height: 60px; }
+
+    /* Month view: shrink count label so it fits in narrow cells */
+    .cal-month-count {
+      font-size: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    /* Edit booking modal: full-width card with 16px inner padding */
+    .cal-edit-overlay { padding: 8px; }
+    .cal-edit-card {
+      max-width: 100%;
+      max-height: calc(100vh - 16px);
+      padding: 16px;
+    }
+    .cal-edit-title { padding-right: 48px; margin-bottom: 20px; font-size: 17px; }
+
+    /* Profile panel full-width on mobile */
+    .profile-panel { max-width: 100%; }
+    .profile-panel-body { padding: 16px; }
+    .profile-panel-header { padding: 14px 16px; }
+    .profile-panel-footer { padding: 14px 16px; }
+
+    /* Recent clients card inner padding tighter */
+    .card { padding: 18px; }
+    .card-calendar { padding: 0; }
   }
 
   /* ── Desktop layout ── */
