@@ -13,93 +13,180 @@
 
   /* Theme variables — light (default) */
   :root {
-    --bg: #F7F6F3;
+    --bg: #F5F4F0;
     --card: #FFFFFF;
-    --text: #1A1A1A;
+    --text: #111111;
     --text-secondary: #555555;
     --text-muted: #999999;
-    --text-faint: #BBBBBB;
-    --text-ghost: #CCCCCC;
-    --border: #F0EDE8;
-    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
-    --skeleton: #EEECEA;
+    --border: rgba(0,0,0,0.06);
+    --skeleton: #ECEAE4;
     --gold: #C9A84C;
-    --gold-bg: rgba(201,168,76,0.08);
     --nav-bg: #FFFFFF;
-    --nav-shadow: 0 -1px 0 rgba(0,0,0,0.04), 0 -4px 12px rgba(0,0,0,0.03);
-    --toast-bg: #2A2A2A;
+    --toast-bg: #111111;
     --toast-color: #FFFFFF;
     --error-bg: rgba(220,38,38,0.06);
     --error-color: #DC2626;
-    --refresh-icon: #888888;
-    --setting-hover: rgba(0,0,0,0.03);
+    --hover: rgba(0,0,0,0.03);
   }
 
   /* Dark theme */
   [data-theme="dark"] {
-    --bg: #0D0D12;
-    --card: #16161F;
-    --text: #EEEEEE;
-    --text-secondary: #BBBBBB;
-    --text-muted: #888888;
-    --text-faint: #666666;
-    --text-ghost: #444444;
-    --border: #2A2A36;
-    --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04);
-    --skeleton: #1E1E2A;
+    --bg: #0E0E10;
+    --card: #17171A;
+    --text: #F2F2F2;
+    --text-secondary: #AAAAAA;
+    --text-muted: #777777;
+    --border: rgba(255,255,255,0.08);
+    --skeleton: #1E1E22;
     --gold: #C9A84C;
-    --gold-bg: rgba(201,168,76,0.12);
-    --nav-bg: #16161F;
-    --nav-shadow: 0 -1px 0 rgba(255,255,255,0.04), 0 -4px 12px rgba(0,0,0,0.2);
-    --toast-bg: #2A2A36;
-    --toast-color: #EEEEEE;
+    --nav-bg: #17171A;
+    --toast-bg: #F2F2F2;
+    --toast-color: #111111;
     --error-bg: rgba(220,38,38,0.12);
     --error-color: #FF6B6B;
-    --refresh-icon: #888888;
-    --setting-hover: rgba(255,255,255,0.04);
+    --hover: rgba(255,255,255,0.04);
   }
 
   body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     padding: 0 0 84px;
     -webkit-font-smoothing: antialiased;
-    transition: background 0.25s, color 0.25s;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .layout-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .container {
     width: 100%;
     max-width: 440px;
     padding: 0 18px;
+    margin: 0 auto;
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  /* Header */
-  .header {
+  /* Sidebar (desktop only) */
+  .sidebar { display: none; }
+
+  .sidebar-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    padding: 4px 12px 28px;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    background: none;
+    border-top: none; border-right: none; border-bottom: none;
+    text-align: left;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .sidebar-link svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+
+  .sidebar-link:hover { color: var(--text); }
+
+  .sidebar-link.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 16px 12px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sidebar-shop {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* Desktop top bar */
+  .top-bar { display: none; }
+
+  .page-title {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  /* Mobile header */
+  .mobile-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 0 18px;
-    position: sticky;
-    top: 0;
+    padding: 28px 0 20px;
     background: var(--bg);
-    z-index: 10;
-    transition: background 0.25s;
+    transition: background 0.15s;
   }
 
-  .header-left { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+  .header-left { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 
   .shop-name {
     font-family: 'Sarabun', sans-serif;
-    font-weight: 700;
-    font-size: 21px;
+    font-weight: 600;
+    font-size: 17px;
     color: var(--text);
     line-height: 1.3;
     overflow: hidden;
@@ -110,12 +197,12 @@
   .operis-badge {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text-faint);
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
@@ -144,61 +231,212 @@
     width: 40px; height: 40px;
     border: none;
     background: transparent;
-    border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    color: var(--text-muted);
+    transition: color 0.15s, transform 0.5s cubic-bezier(0.4,0,0.2,1);
   }
 
+  .btn-refresh:hover { color: var(--text); }
   .btn-refresh:active { transform: rotate(360deg); }
-  .btn-refresh svg { width: 17px; height: 17px; color: var(--text-faint); }
+  .btn-refresh svg { width: 17px; height: 17px; stroke-width: 1.5; }
 
-  /* Stats strip */
+  .top-bar-actions,
+  .mobile-header-actions {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* Profile avatar button (top-right) */
+  .profile-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .profile-avatar:hover { border-color: var(--text-muted); }
+
+  /* Profile overlay & slide-out panel */
+  .profile-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 300;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .profile-overlay[hidden] { display: none; }
+
+  .profile-panel {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    background: var(--card);
+    display: flex; flex-direction: column;
+    animation: slideRight 0.15s ease;
+    overflow: hidden;
+  }
+
+  @keyframes slideRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  .profile-panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .profile-panel-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .profile-panel-close {
+    width: 36px; height: 36px;
+    border: none; background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); cursor: pointer;
+    transition: color 0.15s;
+  }
+  .profile-panel-close:hover { color: var(--text); }
+  .profile-panel-close svg { width: 18px; height: 18px; }
+
+  .profile-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+  }
+
+  .profile-field { margin-bottom: 20px; }
+
+  .profile-field-label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .profile-input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 0 14px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .profile-input::placeholder { color: var(--text-muted); }
+  .profile-input:focus { border-color: var(--text); }
+
+  .profile-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 0 24px;
+  }
+
+  .profile-panel-footer {
+    display: flex; gap: 8px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .profile-btn {
+    flex: 1;
+    height: 44px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .profile-btn-cancel {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+  .profile-btn-cancel:hover { border-color: var(--text-muted); color: var(--text); }
+  .profile-btn-save {
+    background: var(--text);
+    border: 1px solid var(--text);
+    color: var(--card);
+  }
+  .profile-btn-save:hover { opacity: 0.9; }
+  .profile-btn[disabled] { opacity: 0.5; cursor: default; }
+
+  /* Stats strip — horizontal scroll on mobile, 3-col grid on desktop */
   .stats-strip {
     display: flex;
-    gap: 10px;
-    position: sticky;
-    top: var(--header-h, 80px);
-    z-index: 9;
-    background: var(--bg);
-    padding: 8px 0 14px;
-    margin: 0 0 18px;
-    transition: background 0.25s;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 18px 4px;
+    margin: 0 -18px 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .stats-strip::-webkit-scrollbar { display: none; }
 
   .stat-box {
-    flex: 1;
+    flex: 0 0 auto;
+    min-width: 75%;
+    scroll-snap-align: start;
     background: var(--card);
-    border-radius: 14px;
-    padding: 22px 16px 18px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.025);
-    transition: background 0.25s;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
     text-align: left;
-    position: relative;
-    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+
+  .stat-title {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.3;
   }
 
   .stat-number {
     font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: 44px;
+    font-weight: 700;
+    font-size: 48px;
     color: var(--text);
-    line-height: 0.95;
-    margin-bottom: 10px;
+    line-height: 1;
+    margin-bottom: 8px;
     letter-spacing: -0.02em;
-    padding-left: 0;
   }
 
   .stat-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.4;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding-left: 0;
   }
 
   /* Section headers */
@@ -213,16 +451,397 @@
 
   .skeleton-stat {
     background: var(--card);
-    border-radius: 10px;
-    padding: 20px 12px 16px;
-    box-shadow: var(--shadow);
-    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    flex: 0 0 auto;
+    min-width: 75%;
+    scroll-snap-align: start;
     display: flex; flex-direction: column;
-    align-items: center; gap: 8px;
+    gap: 10px;
   }
 
-  .skeleton-stat .skeleton-line.num { width: 36px; height: 34px; }
-  .skeleton-stat .skeleton-line.lbl { width: 48px; height: 12px; }
+  .skeleton-stat .skeleton-line.num { width: 80px; height: 44px; }
+  .skeleton-stat .skeleton-line.lbl { width: 100px; height: 14px; }
+
+  /* Grid rows + cards */
+  .grid-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .card-title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .card-title-row .card-title { margin-bottom: 0; }
+
+  .card-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.15s;
+  }
+  .card-link:hover { color: var(--text); }
+
+  .card-link-bottom {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px 0 0;
+    margin-top: 6px;
+    color: var(--text-secondary);
+  }
+  .card-link-bottom[hidden] { display: none; }
+  #recentClientsList .client-row:last-child { border-bottom: none; }
+
+  /* Calendar card — tighter padding, no top padding so the bar sits flush */
+  .card-calendar {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Recent clients card */
+  .recent-empty, .revenue-empty, .activity-empty {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 8px 0;
+  }
+
+  /* Revenue chart */
+  .revenue-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+  }
+
+  .revenue-total {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .revenue-period {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .revenue-chart {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    align-items: end;
+    height: 140px;
+  }
+
+  .revenue-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    height: 100%;
+  }
+
+  .revenue-bar-track {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    min-height: 0;
+  }
+
+  .revenue-bar {
+    width: 100%;
+    background: var(--gold);
+    border-radius: 4px 4px 0 0;
+    min-height: 3px;
+    transition: opacity 0.15s;
+  }
+
+  .revenue-bar-col:hover .revenue-bar { opacity: 0.8; }
+
+  .revenue-bar-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+
+  .revenue-bar-col.is-today .revenue-bar-label {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* AI activity feed */
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .activity-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .activity-item:first-child { padding-top: 0; }
+  .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .activity-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 3px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    height: fit-content;
+    line-height: 1.2;
+  }
+
+  .activity-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .activity-text {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .activity-text strong {
+    font-weight: 600;
+  }
+
+  .activity-time {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Services view */
+  .services-view {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+  .services-view.active { display: flex; }
+
+  .services-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+
+  .services-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  .btn-add-service {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid var(--text);
+    background: var(--text);
+    color: var(--card);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.15s;
+  }
+  .btn-add-service:hover { opacity: 0.9; }
+  .btn-add-service svg { width: 14px; height: 14px; }
+
+  .services-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, opacity 0.15s;
+  }
+  .service-card:hover { border-color: rgba(0,0,0,0.12); }
+  .service-card.inactive { opacity: 0.55; }
+
+  .service-main { flex: 1; min-width: 0; }
+
+  .service-name {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.3;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .service-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 10px;
+  }
+
+  .service-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+
+  /* Toggle switch */
+  .toggle {
+    position: relative;
+    width: 40px; height: 22px;
+    border-radius: 11px;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+    padding: 0;
+  }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--card);
+    transition: transform 0.15s;
+  }
+  .toggle[aria-pressed="true"] { background: var(--gold); }
+  .toggle[aria-pressed="true"]::after { transform: translateX(18px); }
+
+  /* Service edit form */
+  .service-edit {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .service-edit-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .service-edit-row {
+    display: flex;
+    gap: 12px;
+  }
+  .service-edit-row .profile-field { flex: 1; }
+
+  .service-edit-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .service-edit-actions .profile-btn { min-width: 120px; }
+  .service-edit-actions .profile-btn-delete {
+    background: transparent;
+    border: 1px solid var(--error-color);
+    color: var(--error-color);
+    flex: 0 0 auto;
+  }
+  .service-edit-actions .profile-btn-delete:hover { background: var(--error-bg); }
+
+  .service-edit-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 8px 0 20px;
+  }
+  .service-edit-toggle-label {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 16px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--text); }
+  .back-link svg { width: 14px; height: 14px; stroke-width: 2; }
 
   /* Empty state */
   .empty-state {
@@ -231,49 +850,54 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 48px 24px;
+    padding: 56px 24px;
     min-height: 320px;
     flex: 1;
-    animation: fadeIn 0.25s ease both;
   }
   .empty-icon {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: var(--gold-bg);
+    width: 40px; height: 40px;
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
+    color: var(--text-muted);
   }
-  .empty-icon svg { width: 34px; height: 34px; color: var(--gold); stroke-width: 1.5; }
+  .empty-icon svg { width: 32px; height: 32px; stroke-width: 1.25; }
   .empty-title {
     font-family: 'Sarabun', sans-serif;
-    font-size: 17px; font-weight: 600;
+    font-size: 17px;
+    font-weight: 600;
     color: var(--text);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    line-height: 1.4;
   }
   .empty-desc {
     font-family: 'Sarabun', sans-serif;
     font-size: 14px;
+    font-weight: 400;
     color: var(--text-muted);
-    max-width: 260px;
-    line-height: 1.5;
+    max-width: 280px;
+    line-height: 1.6;
   }
 
   /* Error banner */
   .error-banner {
-    background: var(--error-bg); color: var(--error-color);
+    background: transparent;
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
     font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
-    padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
+    padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;
     display: none; align-items: center; justify-content: space-between; gap: 12px;
   }
 
   .error-banner.visible { display: flex; }
 
   .btn-retry {
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
-    background: none; border: 1.5px solid var(--error-color); color: var(--error-color);
-    border-radius: 6px; padding: 6px 16px; cursor: pointer;
-    white-space: nowrap; min-height: 36px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+    background: none; border: 1px solid var(--error-color); color: var(--error-color);
+    border-radius: 6px; padding: 6px 14px; cursor: pointer;
+    white-space: nowrap; min-height: 32px;
+    transition: background 0.15s;
   }
+  .btn-retry:hover { background: var(--error-bg); }
 
   /* Settings view */
   .settings-view {
@@ -281,19 +905,19 @@
     flex: 1;
     flex-direction: column;
     gap: 0;
-    padding-top: 4px;
+    padding-top: 8px;
   }
 
-  .settings-view.active { display: flex; animation: fadeIn 0.2s ease both; }
+  .settings-view.active { display: flex; }
 
   .settings-group-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text-faint);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 24px 0 6px 2px;
+    padding: 32px 0 12px;
   }
 
   .settings-group-label:first-child { padding-top: 8px; }
@@ -302,18 +926,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
+    padding: 16px 0;
     background: transparent;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 0;
     min-height: 48px;
-    transition: background 0.25s;
   }
 
   .setting-label {
     font-family: 'Sarabun', sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--text);
   }
 
@@ -323,8 +945,7 @@
     border: 1px solid var(--border);
     border-radius: 6px;
     overflow: hidden;
-    background: var(--bg);
-    transition: border-color 0.25s, background 0.25s;
+    background: transparent;
   }
 
   .seg-btn {
@@ -334,10 +955,10 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
     font-weight: 500;
-    color: var(--text-faint);
+    color: var(--text-muted);
     cursor: pointer;
     min-height: 32px;
-    transition: background 0.15s, color 0.15s;
+    transition: color 0.15s, background 0.15s;
     white-space: nowrap;
   }
 
@@ -346,207 +967,171 @@
   }
 
   .seg-btn[aria-pressed="true"] {
-    background: var(--text);
-    color: var(--bg);
+    color: var(--text);
+    background: var(--hover);
   }
 
   /* Bottom nav */
   .bottom-nav {
     position: fixed; bottom: 0; left: 0; right: 0;
     background: var(--nav-bg);
-    box-shadow: var(--nav-shadow);
+    border-top: 1px solid var(--border);
     display: flex; justify-content: center;
     z-index: 20;
-    transition: background 0.25s;
+    transition: background 0.15s, border-color 0.15s;
   }
 
   .bottom-nav-inner {
     width: 100%; max-width: 440px;
-    display: flex; padding: 4px 12px 0;
+    display: flex; padding: 0 12px;
   }
 
   .nav-tab {
     flex: 1;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 4px; padding: 10px 0 14px;
+    gap: 4px; padding: 12px 0 14px;
     background: none; border: none; cursor: pointer;
-    min-height: 58px; color: var(--text-muted);
+    min-height: 60px; color: var(--text-muted);
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
-    position: relative; transition: color 0.15s;
+    transition: color 0.15s;
   }
 
-  .nav-tab svg { width: 22px; height: 22px; stroke-width: 1.6; }
+  .nav-tab svg { width: 22px; height: 22px; stroke-width: 1.25; }
 
   .nav-tab span {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10.5px; font-weight: 500;
-    letter-spacing: 0.03em;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .nav-tab.active { color: var(--gold); }
-  .nav-tab.active svg { stroke-width: 2; }
-  .nav-tab.active span { font-weight: 600; }
-
-  .nav-tab.active::before {
-    content: '';
-    position: absolute; top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 28px; height: 3px;
-    background: var(--gold);
-    border-radius: 0 0 3px 3px;
-  }
+  .nav-tab.active svg { stroke-width: 1.5; }
 
   /* Toast */
   .toast {
-    position: fixed; bottom: 80px; left: 50%;
-    transform: translateX(-50%) translateY(12px);
+    position: fixed; bottom: 88px; left: 50%;
+    transform: translateX(-50%) translateY(8px);
     background: var(--toast-bg); color: var(--toast-color);
-    font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
-    padding: 10px 24px; border-radius: 10px;
+    font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 500;
+    padding: 10px 20px; border-radius: 8px;
     opacity: 0; pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.15s, transform 0.15s;
     z-index: 30; white-space: nowrap;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
   }
 
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .fade-in { animation: fadeIn 0.25s ease both; }
+  .fade-in { animation: fadeIn 0.15s ease both; }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   /* Bookings view wrapper */
-  .bookings-view { display: flex; flex-direction: column; flex: 1; animation: fadeIn 0.2s ease both; }
+  .bookings-view { display: flex; flex-direction: column; flex: 1; }
   .bookings-view.hidden { display: none; }
 
-  /* Calendar */
-  .mini-cal { margin-top: 4px; margin-bottom: 24px; }
-
-  /* Fixed calendar header: date row + view toggle */
+  /* Calendar header: static inside the card */
   .cal-fixed-bar {
-    position: fixed;
-    top: calc(var(--header-h, 80px) + var(--stats-h, 124px));
-    left: 0;
-    right: 0;
-    background: var(--bg);
+    background: transparent;
     border-bottom: 1px solid var(--border);
-    z-index: 100;
-    transition: background 0.25s;
+    transition: background 0.15s, border-color 0.15s;
   }
 
   .cal-fixed-bar[hidden] { display: none; }
 
   .cal-fixed-inner {
     width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
-    padding: 10px 18px 10px;
+    padding: 16px;
   }
 
   .cal-date-row {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding-bottom: 8px;
+    gap: 4px;
+    padding-bottom: 12px;
   }
 
   .cal-date-title {
     flex: 1;
     min-width: 0;
-    text-align: center;
     font-family: 'Sarabun', 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--text);
-    line-height: 1.2;
+    line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 2px;
+    padding: 0 6px;
   }
 
   .cal-nav-btn {
     flex-shrink: 0;
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     border: none;
     background: transparent;
-    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
-    transition: background 0.15s, color 0.15s;
+    transition: color 0.15s;
   }
-  .cal-nav-btn:hover:not([disabled]) { background: var(--setting-hover); color: var(--text); }
-  .cal-nav-btn:active:not([disabled]) { color: var(--text); }
-  .cal-nav-btn svg { width: 18px; height: 18px; }
+  .cal-nav-btn:hover:not([disabled]) { color: var(--text); }
+  .cal-nav-btn svg { width: 16px; height: 16px; stroke-width: 1.75; }
   .cal-nav-btn[disabled] { opacity: 0.3; cursor: default; }
 
   .cal-today-btn {
     flex-shrink: 0;
     font-family: 'Sarabun', 'DM Sans', sans-serif;
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--gold);
-    background: var(--gold-bg);
-    border: 1px solid rgba(201,168,76,0.25);
-    padding: 6px 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
     white-space: nowrap;
-    margin-left: 4px;
-    transition: background 0.15s, transform 0.1s;
+    margin-left: 6px;
+    transition: color 0.15s, border-color 0.15s;
   }
-  .cal-today-btn:hover { background: rgba(201,168,76,0.18); }
-  .cal-today-btn:active { transform: scale(0.96); }
+  .cal-today-btn:hover { color: var(--text); border-color: var(--text-muted); }
   .cal-today-btn[hidden] { display: none; }
 
   .cal-view-toggle {
     display: flex;
-    background: var(--border);
-    border-radius: 7px;
-    padding: 2px;
-    transition: background 0.25s;
+    gap: 4px;
   }
 
   .cal-vt-btn {
     flex: 1;
-    padding: 7px 0;
+    padding: 8px 0;
     border: none;
     background: transparent;
-    border-radius: 5px;
+    border-radius: 6px;
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-muted);
     cursor: pointer;
-    transition: background 0.15s, color 0.15s;
+    transition: color 0.15s, background 0.15s;
+    letter-spacing: 0.02em;
   }
 
   .cal-vt-btn.active {
-    background: var(--card);
     color: var(--text);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    font-weight: 600;
+    background: var(--hover);
   }
 
-  @media (min-width: 600px) {
-    .cal-fixed-inner { max-width: 560px; padding: 12px 28px 12px; }
-    .cal-date-title { font-size: 16px; }
-  }
-  @media (min-width: 820px) {
-    .cal-fixed-inner { max-width: 600px; padding: 12px 32px 12px; }
-  }
-
-  /* Content area below fixed bar */
-  .cal-content { padding-top: var(--cal-bar-h, 140px); }
+  /* Calendar content — default no top padding; mobile override adds it below */
+  .cal-content { padding-top: 0; }
 
   /* Day-view stacked grids */
   .cal-days { position: relative; }
@@ -557,8 +1142,8 @@
     position: absolute;
     left: 0; width: 42px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px; font-weight: 500;
-    color: var(--text-faint);
+    font-size: 11px; font-weight: 400;
+    color: var(--text-muted);
     text-align: right;
     padding-right: 6px;
     transform: translateY(-50%);
@@ -569,8 +1154,8 @@
 
   .cal-hour-label.cal-hour-date {
     font-family: 'Sarabun', 'DM Sans', sans-serif;
-    font-size: 10.5px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
     color: var(--text);
     letter-spacing: -0.01em;
   }
@@ -612,37 +1197,42 @@
   .cal-block {
     position: absolute;
     left: 46px; right: 2px;
-    border-radius: 5px;
-    background: #F0EBDD;
+    border-radius: 6px;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-left: 3px solid var(--gold);
-    padding: 4px 8px;
+    padding: 6px 10px;
     overflow: hidden;
     cursor: pointer;
     z-index: 2;
-    transition: opacity 0.1s;
+    transition: border-color 0.15s, opacity 0.15s;
   }
-  [data-theme="dark"] .cal-block { background: #252018; }
-  .cal-block:active { opacity: 0.7; }
+  .cal-block:hover { border-color: rgba(0,0,0,0.12); }
+  .cal-block:active { opacity: 0.75; }
 
   .cal-block-service {
     font-family: 'Sarabun', sans-serif;
     font-size: 13px; font-weight: 600;
     color: var(--text);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    line-height: 1.3;
+    line-height: 1.4;
   }
 
   .cal-block-client {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px; color: var(--text-muted);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    line-height: 1.3;
+    line-height: 1.4;
   }
 
   .cal-block-time {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px; color: var(--text-faint);
-    line-height: 1.3;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.4;
   }
 
   /* Week view */
@@ -650,39 +1240,30 @@
     display: grid;
     grid-template-columns: 44px repeat(7, 1fr);
     border-bottom: 1px solid var(--border);
-    padding: 6px 0 8px;
+    padding: 8px 0 10px;
     margin-bottom: 4px;
   }
 
   .cal-week-hcell {
     text-align: center;
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 600;
+    font-size: 11px; font-weight: 500;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     line-height: 1;
   }
 
   .cal-week-hnum {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px; font-weight: 700;
+    font-size: 15px; font-weight: 600;
     color: var(--text);
     display: block;
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
-  .cal-week-hcell.is-today .cal-week-hnum {
-    color: var(--card);
-    background: var(--text);
-    border-radius: 50%;
-    width: 26px; height: 26px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    margin-top: 2px;
-  }
+  .cal-week-hcell.is-today .cal-week-hcell-label { color: var(--text); }
+  .cal-week-hcell.is-today .cal-week-hnum { color: var(--text); font-weight: 700; }
 
   .cal-week-body { position: relative; }
 
@@ -699,17 +1280,18 @@
   .cal-month-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    gap: 2px;
+    padding: 4px 0;
   }
 
   .cal-month-dow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 600;
+    font-size: 11px; font-weight: 500;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    text-align: center;
-    padding: 8px 0;
+    text-align: left;
+    padding: 8px 6px;
   }
 
   .cal-month-day {
@@ -717,310 +1299,728 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+    padding: 8px;
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--text);
-    background: var(--card);
-    border-radius: 8px;
-    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.03);
+    transition: background 0.15s;
   }
 
-  .cal-month-day:active { background: var(--setting-hover); }
-  .cal-month-day.other { color: var(--text-ghost); background: transparent; box-shadow: none; cursor: default; }
-  .cal-month-day.today { border-color: var(--gold); color: var(--gold); font-weight: 700; }
+  .cal-month-day:hover { background: var(--hover); }
+  .cal-month-day.other { color: var(--text-muted); cursor: default; }
+  .cal-month-day.other:hover { background: transparent; }
+  .cal-month-day.today {
+    color: var(--text);
+    font-weight: 700;
+    background: var(--hover);
+  }
 
   .cal-month-count {
     font-family: 'DM Sans', sans-serif;
-    font-size: 9px; font-weight: 700;
-    color: var(--gold);
-    background: var(--gold-bg);
-    padding: 2px 6px;
-    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
     line-height: 1;
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
   }
 
-  /* Edit overlay */
+  /* Edit booking overlay */
   .cal-edit-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.5);
     z-index: 200;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
+    padding: 16px;
+    animation: calEditOverlayFade 0.15s ease;
   }
 
   .cal-edit-overlay.open { display: flex; }
 
+  @keyframes calEditOverlayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   .cal-edit-card {
     background: var(--card);
-    width: 100%; max-width: 480px;
-    border-radius: 12px 12px 0 0;
-    padding: 20px 20px 28px;
-    animation: slideUp 0.2s ease;
+    border: 1px solid var(--border);
+    width: 100%;
+    max-width: 500px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    animation: calEditCardIn 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
-  .cal-edit-handle {
-    width: 32px; height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    margin: 0 auto 14px;
+  @keyframes calEditCardIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
+
+  .cal-edit-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px; height: 36px;
+    border: none;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .cal-edit-close:hover { color: var(--text); background: var(--hover); }
+  .cal-edit-close svg { width: 18px; height: 18px; stroke-width: 1.8; }
 
   .cal-edit-title {
     font-family: 'DM Sans', sans-serif;
-    font-size: 16px; font-weight: 600;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--text);
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+    padding-right: 32px;
   }
 
-  .cal-edit-field { margin-bottom: 12px; }
+  .cal-edit-field { margin-bottom: 16px; }
 
   .cal-edit-label {
+    display: block;
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px; font-weight: 600;
-    color: var(--text-faint);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
-  .cal-edit-input {
+  .cal-edit-input,
+  .cal-edit-select {
     width: 100%; height: 44px;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: var(--bg);
+    background: transparent;
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
     padding: 0 12px;
     outline: none;
+    transition: border-color 0.15s;
   }
+  .cal-edit-select { appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>'); background-repeat: no-repeat; background-position: right 12px center; padding-right: 34px; }
 
-  .cal-edit-input:focus { border-color: var(--text-muted); }
+  .cal-edit-input:focus,
+  .cal-edit-select:focus { border-color: var(--text); }
 
-  textarea.cal-edit-input { height: 56px; padding: 8px 10px; resize: none; font-family: 'Sarabun', sans-serif; }
+  textarea.cal-edit-input { height: 72px; padding: 10px 12px; resize: vertical; line-height: 1.5; }
 
-  .cal-edit-actions { display: flex; gap: 8px; margin-top: 14px; }
-
-  .cal-edit-btn {
-    flex: 1; height: 44px; border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px; font-weight: 600;
-    cursor: pointer; border: none;
+  .cal-edit-row {
+    display: flex;
+    gap: 12px;
   }
-
-  .cal-edit-cancel { background: transparent; color: var(--text-faint); }
-  .cal-edit-save { background: var(--text); color: var(--bg); }
+  .cal-edit-row .cal-edit-field { flex: 1; margin-bottom: 0; }
+  .cal-edit-row { margin-bottom: 16px; }
 
   /* Clients view */
   .clients-view {
     display: none;
     flex: 1;
     flex-direction: column;
+    padding-top: 8px;
   }
 
-  .clients-view.active { display: flex; animation: fadeIn 0.2s ease both; }
+  .clients-view.active { display: flex; }
 
   .clients-search {
     width: 100%;
-    height: 40px;
+    height: 44px;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: var(--card);
+    background: transparent;
     color: var(--text);
     font-family: 'Sarabun', sans-serif;
     font-size: 14px;
-    padding: 0 12px;
+    padding: 0 14px;
     outline: none;
-    margin-bottom: 16px;
-    transition: border-color 0.15s, background 0.25s;
+    margin-bottom: 20px;
+    transition: border-color 0.15s;
   }
 
-  .clients-search::placeholder { color: var(--text-faint); }
-  .clients-search:focus { border-color: var(--gold); }
+  .clients-search::placeholder { color: var(--text-muted); }
+  .clients-search:focus { border-color: var(--text); }
 
   .client-row {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 0;
+    gap: 16px;
+    padding: 14px 0;
     border-bottom: 1px solid var(--border);
   }
 
   .client-avatar {
     width: 36px; height: 36px;
     border-radius: 50%;
-    background: var(--gold-bg);
+    background: transparent;
+    border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px; font-weight: 700;
-    color: var(--gold);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
     flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   .client-info { flex: 1; min-width: 0; }
 
   .client-name {
     font-family: 'Sarabun', sans-serif;
-    font-size: 14px; font-weight: 600;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    line-height: 1.4;
   }
 
   .client-meta {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px; color: var(--text-faint);
-    display: flex; gap: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-muted);
+    display: flex; gap: 10px;
+    line-height: 1.4;
   }
 
   .client-phone-btn {
     width: 36px; height: 36px;
     border: none; background: transparent;
-    border-radius: 8px; cursor: pointer;
+    cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.15s;
   }
 
-  .client-phone-btn svg { width: 15px; height: 15px; color: var(--text-faint); }
-  .client-phone-btn:active { background: var(--gold-bg); }
+  .client-phone-btn:hover { color: var(--text); }
+  .client-phone-btn svg { width: 16px; height: 16px; stroke-width: 1.5; }
+
+  /* Client cards (clients page) */
+  .clients-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .client-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .client-card:hover { border-color: rgba(0,0,0,0.12); }
+  .client-card.expanded { border-color: rgba(0,0,0,0.12); }
+
+  .client-card-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+  }
+
+  .client-detail {
+    border-top: 1px solid var(--border);
+    padding: 16px;
+    background: transparent;
+  }
+
+  .client-detail-loading,
+  .client-detail-empty {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+  }
+
+  .client-detail-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .client-detail-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .client-detail-value {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .client-detail-section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .client-booking-list { display: flex; flex-direction: column; }
+
+  .client-booking-item {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .client-booking-item:first-child { padding-top: 0; }
+  .client-booking-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .client-booking-date {
+    flex-shrink: 0;
+    width: 72px;
+  }
+  .cbd-day {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .cbd-time {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .client-booking-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .client-booking-service {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .client-booking-status {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .client-booking-status.status-confirmed { color: #22A665; border-color: rgba(34,166,101,0.4); }
+  .client-booking-status.status-cancelled,
+  .client-booking-status.status-canceled { color: var(--error-color); border-color: var(--error-color); }
+
+  /* Client edit UI */
+  .client-edit-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+  .client-edit-pencil {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .client-edit-pencil:hover { color: var(--text); border-color: var(--text-muted); }
+  .client-edit-pencil svg { width: 14px; height: 14px; }
+
+  .client-edit-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-textarea {
+    height: auto;
+    padding: 10px 14px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 72px;
+  }
+
+  .client-detail-notes {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .client-notes-text {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    margin-top: 6px;
+  }
 
   .clients-count {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 500;
-    color: var(--text-faint);
-    letter-spacing: 0.04em;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 0 0 8px 2px;
+    padding: 0 0 12px;
   }
 
-  /* Responsive */
+  /* ── Mobile-only: small phones ── */
   @media (max-width: 375px) {
-    .container { padding: 0 14px; }
-    .stat-number { font-size: 36px; }
-    .stats-strip { gap: 8px; }
-    .stat-box { padding: 18px 12px 14px; }
-    .shop-name { font-size: 18px; }
+    .container { padding: 0 16px; }
+    .stat-number { font-size: 40px; }
+    .stat-box { min-width: 80%; }
   }
 
-  @media (min-width: 600px) {
-    .container { max-width: 560px; padding: 0 28px; }
-    .stat-number { font-size: 52px; }
-    .stat-box { padding: 28px 20px 22px; }
-    .stats-strip { gap: 14px; padding: 10px 0 18px; margin-bottom: 22px; }
-    .bottom-nav-inner { max-width: 560px; }
+  /* Calendar self-scroll container */
+  .cal-scroll {
+    position: relative;
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
-  @media (min-width: 820px) {
-    .container { max-width: 600px; padding: 0 32px; }
-    .bottom-nav-inner { max-width: 600px; }
+  @media (max-width: 767px) {
+    .cal-fixed-inner { padding: 14px 16px; }
+    .card-calendar { padding: 0; }
+    .card-calendar .cal-scroll { padding: 0 0 12px; }
+  }
+
+  /* ── Desktop layout ── */
+  @media (min-width: 768px) {
+    body {
+      padding: 0 0 0 240px;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      display: flex;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 240px;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 28px 20px;
+      flex-direction: column;
+      gap: 4px;
+      overflow-y: auto;
+      z-index: 50;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 40px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-header { display: none; }
+    .bottom-nav { display: none; }
+
+    .container {
+      max-width: 1120px;
+      padding: 28px 40px;
+    }
+
+    /* Stats become a proper 3-col grid */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      overflow: visible;
+      padding: 0;
+      margin: 0 0 28px;
+    }
+    .stat-box {
+      min-width: 0;
+      flex: unset;
+    }
+    .skeleton-stat {
+      min-width: 0;
+      flex: unset;
+    }
+
+    /* Row 2: Revenue + AI Activity → 50/50 */
+    .grid-row-analytics { grid-template-columns: 1fr 1fr; }
+
+    /* Row 3: Calendar + Recent Clients → 60/40 */
+    .grid-row-calendar { grid-template-columns: 3fr 2fr; }
+
+    /* Calendar card: keep side padding inside card */
+    .card-calendar { padding: 0; }
+    .card-calendar .cal-fixed-inner { padding: 20px 24px 16px; }
+    .card-calendar .cal-scroll { height: 500px; padding: 0 12px 16px; }
+
+    /* Revenue chart taller on desktop */
+    .revenue-chart { height: 180px; }
+  }
+
+  @media (min-width: 1100px) {
+    .container { padding: 28px 56px; }
+    .top-bar { padding: 28px 56px; }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header class="header">
+<!-- Desktop sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">OPERIS</div>
+  <nav class="sidebar-nav">
+    <button class="sidebar-link active" data-view="bookings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span data-i18n="nav_dashboard">Dashboard</span>
+    </button>
+    <button class="sidebar-link" data-view="clients">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+      <span data-i18n="nav_clients">Clients</span>
+    </button>
+    <button class="sidebar-link" data-view="services">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      <span data-i18n="nav_services">Services</span>
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-shop" id="sidebarShopName">&nbsp;</div>
+    <div class="sidebar-badge"><div class="pulse-dot"></div>OPERIS</div>
+  </div>
+</aside>
+
+<div class="layout-main">
+
+  <!-- Desktop top bar -->
+  <header class="top-bar">
+    <h1 class="page-title" id="pageTitle" data-i18n="nav_dashboard">Dashboard</h1>
+    <div class="top-bar-actions">
+      <button class="btn-refresh" id="refreshBtnDesktop" aria-label="Refresh">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6"/><path d="M21.34 13A10 10 0 1 1 18.57 4.62L21.5 8"/></svg>
+      </button>
+      <button class="profile-avatar" id="profileAvatarDesktop" aria-label="Profile">
+        <span id="profileInitialsDesktop">·</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile header -->
+  <header class="mobile-header">
     <div class="header-left">
       <div class="shop-name" id="shopName">&nbsp;</div>
       <div class="operis-badge"><div class="pulse-dot"></div>OPERIS</div>
     </div>
-    <button class="btn-refresh" id="refreshBtn" aria-label="Refresh">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6"/><path d="M21.34 13A10 10 0 1 1 18.57 4.62L21.5 8"/></svg>
-    </button>
+    <div class="mobile-header-actions">
+      <button class="btn-refresh" id="refreshBtn" aria-label="Refresh">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6"/><path d="M21.34 13A10 10 0 1 1 18.57 4.62L21.5 8"/></svg>
+      </button>
+      <button class="profile-avatar" id="profileAvatarMobile" aria-label="Profile">
+        <span id="profileInitialsMobile">·</span>
+      </button>
+    </div>
   </header>
 
-  <div class="error-banner" id="errorBanner">
-    <span data-i18n="error_load">ไม่สามารถโหลดข้อมูลได้</span>
-    <button class="btn-retry" id="retryBtn" data-i18n="retry">ลองใหม่</button>
-  </div>
+  <div class="container">
+    <div class="error-banner" id="errorBanner">
+      <span data-i18n="error_load">ไม่สามารถโหลดข้อมูลได้</span>
+      <button class="btn-retry" id="retryBtn" data-i18n="retry">ลองใหม่</button>
+    </div>
 
-  <!-- Bookings view -->
-  <div class="bookings-view" id="bookingsView">
-    <div id="statsStrip" class="stats-strip"></div>
-    <div id="calendarSection" class="mini-cal"></div>
-  </div>
+    <!-- Bookings / Dashboard view -->
+    <div class="bookings-view" id="bookingsView">
+      <div id="statsStrip" class="stats-strip"></div>
 
-  <!-- Clients view -->
-  <div class="clients-view" id="clientsView"></div>
+      <div class="grid-row grid-row-analytics">
+        <div class="card card-revenue">
+          <h2 class="card-title" data-i18n="revenue_summary">Revenue Summary</h2>
+          <div id="revenueCard"></div>
+        </div>
 
-  <!-- Settings view -->
-  <div class="settings-view" id="settingsView">
-    <div class="settings-group-label" data-i18n="settings_language">ภาษา</div>
-    <div class="setting-row">
-      <div class="setting-label" data-i18n="language">ภาษา</div>
-      <div class="seg-control" id="langControl">
-        <button class="seg-btn" aria-pressed="true" data-val="th">ไทย</button>
-        <button class="seg-btn" aria-pressed="false" data-val="en">English</button>
+        <div class="card card-activity">
+          <h2 class="card-title" data-i18n="ai_activity">AI Activity</h2>
+          <div id="aiActivityFeed"></div>
+        </div>
+      </div>
+
+      <div class="grid-row grid-row-calendar">
+        <div class="card card-calendar">
+          <div class="cal-fixed-bar" id="calFixedBar" hidden>
+            <div class="cal-fixed-inner">
+              <div class="cal-date-row">
+                <button class="cal-nav-btn" id="calPrev" aria-label="Previous">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17l-5-5 5-5"/></svg>
+                </button>
+                <div class="cal-date-title" id="calDateTitle"></div>
+                <button class="cal-nav-btn" id="calNext" aria-label="Next">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5"/></svg>
+                </button>
+                <button class="cal-today-btn" id="calToday" data-i18n="today_label" hidden>วันนี้</button>
+              </div>
+              <div class="cal-view-toggle" id="calViewToggle">
+                <button class="cal-vt-btn" data-v="day" data-i18n="cal_daily">วัน</button>
+                <button class="cal-vt-btn" data-v="week" data-i18n="cal_weekly">สัปดาห์</button>
+                <button class="cal-vt-btn" data-v="month" data-i18n="cal_monthly">เดือน</button>
+              </div>
+            </div>
+          </div>
+          <div id="calendarSection" class="cal-scroll"></div>
+        </div>
+
+        <div class="card card-recent">
+          <h2 class="card-title" data-i18n="recent_clients">Recent Clients</h2>
+          <div id="recentClientsList"></div>
+          <button class="card-link card-link-bottom" id="recentViewAll" data-i18n="view_all" hidden>View all</button>
+        </div>
       </div>
     </div>
 
-    <div class="settings-group-label" data-i18n="settings_appearance">ธีม</div>
-    <div class="setting-row">
-      <div class="setting-label" data-i18n="theme">ธีม</div>
-      <div class="seg-control" id="themeControl">
-        <button class="seg-btn" aria-pressed="false" data-val="light" data-i18n="theme_light">สว่าง</button>
-        <button class="seg-btn" aria-pressed="true" data-val="system" data-i18n="theme_system">อัตโนมัติ</button>
-        <button class="seg-btn" aria-pressed="false" data-val="dark" data-i18n="theme_dark">มืด</button>
+    <!-- Clients full view -->
+    <div class="clients-view" id="clientsView"></div>
+
+    <!-- Services placeholder -->
+    <div class="services-view" id="servicesView"></div>
+  </div>
+</div>
+
+<!-- Profile slide-out panel -->
+<div class="profile-overlay" id="profileOverlay" hidden>
+  <div class="profile-panel" role="dialog" aria-label="Profile">
+    <div class="profile-panel-header">
+      <h2 class="profile-panel-title" data-i18n="profile_title">โปรไฟล์</h2>
+      <button class="profile-panel-close" id="profileClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="profile-panel-body">
+      <div class="profile-field">
+        <label class="profile-field-label" data-i18n="business_name">ชื่อร้าน</label>
+        <input type="text" class="profile-input" id="profileBusiness">
+      </div>
+      <div class="profile-field">
+        <label class="profile-field-label" data-i18n="owner_name">ชื่อเจ้าของ</label>
+        <input type="text" class="profile-input" id="profileOwner">
+      </div>
+      <div class="profile-field">
+        <label class="profile-field-label" data-i18n="phone">เบอร์โทร</label>
+        <input type="tel" class="profile-input" id="profilePhone">
+      </div>
+
+      <div class="profile-divider"></div>
+
+      <div class="profile-field">
+        <label class="profile-field-label" data-i18n="language">ภาษา</label>
+        <div class="seg-control" id="langControl">
+          <button class="seg-btn" aria-pressed="true" data-val="th">ไทย</button>
+          <button class="seg-btn" aria-pressed="false" data-val="en">English</button>
+        </div>
+      </div>
+      <div class="profile-field">
+        <label class="profile-field-label" data-i18n="theme">ธีม</label>
+        <div class="seg-control" id="themeControl">
+          <button class="seg-btn" aria-pressed="false" data-val="light" data-i18n="theme_light">สว่าง</button>
+          <button class="seg-btn" aria-pressed="true" data-val="system" data-i18n="theme_system">อัตโนมัติ</button>
+          <button class="seg-btn" aria-pressed="false" data-val="dark" data-i18n="theme_dark">มืด</button>
+        </div>
+      </div>
+      <div class="profile-field">
+        <label class="profile-field-label" data-i18n="currency">สกุลเงิน</label>
+        <div class="seg-control" id="currencyControl">
+          <button class="seg-btn" aria-pressed="true" data-val="THB">฿ THB</button>
+          <button class="seg-btn" aria-pressed="false" data-val="USD">$ USD</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="cal-fixed-bar" id="calFixedBar" hidden>
-  <div class="cal-fixed-inner">
-    <div class="cal-date-row">
-      <button class="cal-nav-btn" id="calPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17l-5-5 5-5"/></svg>
-      </button>
-      <div class="cal-date-title" id="calDateTitle"></div>
-      <button class="cal-nav-btn" id="calNext" aria-label="Next">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5"/></svg>
-      </button>
-      <button class="cal-today-btn" id="calToday" data-i18n="today_label" hidden>วันนี้</button>
-    </div>
-    <div class="cal-view-toggle" id="calViewToggle">
-      <button class="cal-vt-btn" data-v="day" data-i18n="cal_daily">วัน</button>
-      <button class="cal-vt-btn" data-v="week" data-i18n="cal_weekly">สัปดาห์</button>
-      <button class="cal-vt-btn" data-v="month" data-i18n="cal_monthly">เดือน</button>
-    </div>
-  </div>
-</div>
-
-<div class="cal-edit-overlay" id="calEditOverlay">
+<div class="cal-edit-overlay" id="calEditOverlay" role="dialog" aria-modal="true">
   <div class="cal-edit-card">
-    <div class="cal-edit-handle"></div>
-    <div class="cal-edit-title" data-i18n="cal_edit_title">แก้ไขนัดหมาย</div>
+    <button class="cal-edit-close" id="calEditCloseBtn" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <h2 class="cal-edit-title" data-i18n="cal_edit_title">แก้ไขนัดหมาย</h2>
+
     <div class="cal-edit-field">
-      <div class="cal-edit-label" data-i18n="cal_edit_service">บริการ</div>
-      <input class="cal-edit-input" type="text" id="calEditService">
+      <label class="cal-edit-label" data-i18n="cal_edit_service">บริการ</label>
+      <select class="cal-edit-select" id="calEditService"></select>
     </div>
-    <div style="display:flex;gap:8px">
-      <div class="cal-edit-field" style="flex:1">
-        <div class="cal-edit-label" data-i18n="cal_edit_date">วันที่</div>
-        <input class="cal-edit-input" type="date" id="calEditDate">
-      </div>
-      <div class="cal-edit-field" style="flex:1">
-        <div class="cal-edit-label" data-i18n="cal_edit_time">เวลา</div>
-        <input class="cal-edit-input" type="time" id="calEditTime">
-      </div>
-    </div>
+
     <div class="cal-edit-field">
-      <div class="cal-edit-label" data-i18n="cal_edit_notes">หมายเหตุ</div>
-      <textarea class="cal-edit-input" id="calEditNotes"></textarea>
+      <label class="cal-edit-label" data-i18n="cal_edit_date">วันที่</label>
+      <input class="cal-edit-input" type="date" id="calEditDate">
     </div>
-    <div class="cal-edit-actions">
-      <button class="cal-edit-btn cal-edit-cancel" id="calEditCancel" data-i18n="cal_edit_done">เสร็จ</button>
+
+    <div class="cal-edit-row">
+      <div class="cal-edit-field">
+        <label class="cal-edit-label" data-i18n="cal_edit_start">เวลาเริ่ม</label>
+        <input class="cal-edit-input" type="time" id="calEditStart">
+      </div>
+      <div class="cal-edit-field">
+        <label class="cal-edit-label" data-i18n="cal_edit_end">เวลาสิ้นสุด</label>
+        <input class="cal-edit-input" type="time" id="calEditEnd">
+      </div>
+    </div>
+
+    <div class="cal-edit-field">
+      <label class="cal-edit-label" data-i18n="cal_edit_client">ลูกค้า</label>
+      <input class="cal-edit-input" type="text" id="calEditClient">
+    </div>
+
+    <div class="cal-edit-field">
+      <label class="cal-edit-label" data-i18n="cal_edit_status">สถานะ</label>
+      <select class="cal-edit-select" id="calEditStatus">
+        <option value="confirmed" data-i18n="status_confirmed">ยืนยันแล้ว</option>
+        <option value="pending" data-i18n="status_pending">รอดำเนินการ</option>
+        <option value="cancelled" data-i18n="status_cancelled">ยกเลิก</option>
+      </select>
+    </div>
+
+    <div class="cal-edit-field">
+      <label class="cal-edit-label" data-i18n="cal_edit_notes">หมายเหตุ</label>
+      <textarea class="cal-edit-input" id="calEditNotes" rows="2"></textarea>
     </div>
   </div>
 </div>
@@ -1028,16 +2028,16 @@
 <nav class="bottom-nav">
   <div class="bottom-nav-inner">
     <button class="nav-tab active" id="navBookings">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
-      <span data-i18n="nav_bookings">การจอง</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span data-i18n="nav_dashboard">แดชบอร์ด</span>
     </button>
     <button class="nav-tab" id="navClients">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
       <span data-i18n="nav_clients">ลูกค้า</span>
     </button>
-    <button class="nav-tab" id="navSettings">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-      <span data-i18n="nav_settings">ตั้งค่า</span>
+    <button class="nav-tab" id="navServices">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      <span data-i18n="nav_services">บริการ</span>
     </button>
   </div>
 </nav>
@@ -1069,19 +2069,49 @@ const STRINGS = {
     theme_light: 'สว่าง',
     theme_system: 'อัตโนมัติ',
     theme_dark: 'มืด',
-    stat_today: 'นัดวันนี้',
-    stat_week: 'นัดสัปดาห์นี้',
+    nav_dashboard: 'แดชบอร์ด',
+    nav_services: 'บริการ',
+    stat_today: 'วันนี้',
+    stat_week: 'สัปดาห์นี้',
     stat_clients: 'ลูกค้าทั้งหมด',
+    stat_today_sub: 'นัดหมายวันนี้',
+    stat_week_sub: 'นัดหมายสัปดาห์นี้',
+    stat_clients_sub: 'ลูกค้าที่ลงทะเบียน',
+    recent_clients: 'ลูกค้าล่าสุด',
+    view_all: 'ดูทั้งหมด',
+    revenue_summary: 'สรุปรายได้',
+    revenue_total: 'รวม 7 วัน',
+    revenue_unit: 'นัด',
+    ai_activity: 'กิจกรรม AI',
+    ai_booked: 'AI จอง',
+    ai_for: 'ให้',
+    ai_at: 'เวลา',
+    services_title: 'บริการ',
+    services_soon: 'เร็ว ๆ นี้',
     coming_soon: 'เร็วๆ นี้',
+    no_recent: 'ยังไม่มีลูกค้า',
+    no_activity: 'ยังไม่มีกิจกรรม',
+    time_just_now: 'เมื่อสักครู่',
+    time_min: ' นาที',
+    time_hr: ' ชม.',
+    time_day: ' วัน',
+    time_ago: 'ก่อน',
     cal_daily: 'วัน',
     cal_weekly: 'สัปดาห์',
     cal_monthly: 'เดือน',
     cal_edit_title: 'แก้ไขนัดหมาย',
     cal_edit_date: 'วันที่',
     cal_edit_time: 'เวลา',
+    cal_edit_start: 'เวลาเริ่ม',
+    cal_edit_end: 'เวลาสิ้นสุด',
     cal_edit_service: 'บริการ',
+    cal_edit_client: 'ลูกค้า',
+    cal_edit_status: 'สถานะ',
     cal_edit_notes: 'หมายเหตุ',
     cal_edit_done: 'เสร็จ',
+    status_confirmed: 'ยืนยันแล้ว',
+    status_pending: 'รอดำเนินการ',
+    status_cancelled: 'ยกเลิก',
     saved: 'บันทึกแล้ว',
     error_save: 'บันทึกไม่สำเร็จ',
     search_clients: 'ค้นหาลูกค้า...',
@@ -1091,6 +2121,30 @@ const STRINGS = {
     empty_timeline_desc: 'ตารางของคุณยังว่างอยู่ นัดหมายใหม่จะแสดงที่นี่',
     empty_clients_title: 'ไม่พบลูกค้า',
     empty_clients_desc: 'ลองค้นหาด้วยชื่อหรือหมายเลขโทรศัพท์อื่น',
+    profile_title: 'โปรไฟล์',
+    business_name: 'ชื่อร้าน',
+    owner_name: 'ชื่อเจ้าของ',
+    phone: 'เบอร์โทร',
+    close: 'ปิด',
+    currency: 'สกุลเงิน',
+    add_service: 'เพิ่มบริการ',
+    new_service: 'เพิ่มบริการ',
+    edit_service: 'แก้ไขบริการ',
+    service_name: 'ชื่อบริการ',
+    duration: 'ระยะเวลา (นาที)',
+    price: 'ราคา',
+    active: 'ใช้งาน',
+    delete_btn: 'ลบ',
+    delete_confirm: 'ลบบริการนี้?',
+    min_unit: 'นาที',
+    total_visits: 'จำนวนครั้งทั้งหมด',
+    last_visit: 'ครั้งล่าสุด',
+    booking_history: 'ประวัติการจอง',
+    no_bookings: 'ยังไม่มีนัดหมาย',
+    no_services: 'ยังไม่มีบริการ',
+    notes: 'หมายเหตุ',
+    edit: 'แก้ไข',
+    required_name: 'กรุณาระบุชื่อ',
     months: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
     days: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
     days_short: ['อา','จ','อ','พ','พฤ','ศ','ส'],
@@ -1111,19 +2165,49 @@ const STRINGS = {
     theme_light: 'Light',
     theme_system: 'Auto',
     theme_dark: 'Dark',
-    stat_today: "Today's Bookings",
-    stat_week: "This Week's Bookings",
+    nav_dashboard: 'Dashboard',
+    nav_services: 'Services',
+    stat_today: 'Today',
+    stat_week: 'This Week',
     stat_clients: 'Total Clients',
+    stat_today_sub: 'bookings today',
+    stat_week_sub: 'bookings this week',
+    stat_clients_sub: 'registered',
+    recent_clients: 'Recent Clients',
+    view_all: 'View all',
+    revenue_summary: 'Revenue Summary',
+    revenue_total: 'last 7 days',
+    revenue_unit: 'bookings',
+    ai_activity: 'AI Activity',
+    ai_booked: 'AI booked',
+    ai_for: 'for',
+    ai_at: 'at',
+    services_title: 'Services',
+    services_soon: 'Coming soon',
     coming_soon: 'Coming soon',
+    no_recent: 'No clients yet',
+    no_activity: 'No activity yet',
+    time_just_now: 'just now',
+    time_min: 'm',
+    time_hr: 'h',
+    time_day: 'd',
+    time_ago: 'ago',
     cal_daily: 'Day',
     cal_weekly: 'Week',
     cal_monthly: 'Month',
     cal_edit_title: 'Edit Booking',
     cal_edit_date: 'Date',
     cal_edit_time: 'Time',
+    cal_edit_start: 'Start Time',
+    cal_edit_end: 'End Time',
     cal_edit_service: 'Service',
+    cal_edit_client: 'Client',
+    cal_edit_status: 'Status',
     cal_edit_notes: 'Notes',
     cal_edit_done: 'Done',
+    status_confirmed: 'Confirmed',
+    status_pending: 'Pending',
+    status_cancelled: 'Cancelled',
     saved: 'Saved',
     error_save: 'Save failed',
     search_clients: 'Search clients...',
@@ -1133,6 +2217,30 @@ const STRINGS = {
     empty_timeline_desc: 'Your schedule is clear. New bookings will show up here.',
     empty_clients_title: 'No clients found',
     empty_clients_desc: 'Try a different name or phone number.',
+    profile_title: 'Profile',
+    business_name: 'Business Name',
+    owner_name: 'Owner Name',
+    phone: 'Phone',
+    close: 'Close',
+    currency: 'Currency',
+    add_service: 'Add Service',
+    new_service: 'New Service',
+    edit_service: 'Edit Service',
+    service_name: 'Service Name',
+    duration: 'Duration (min)',
+    price: 'Price',
+    active: 'Active',
+    delete_btn: 'Delete',
+    delete_confirm: 'Delete this service?',
+    min_unit: 'min',
+    total_visits: 'Total visits',
+    last_visit: 'Last visit',
+    booking_history: 'Booking history',
+    no_bookings: 'No bookings yet',
+    no_services: 'No services yet',
+    notes: 'Notes',
+    edit: 'Edit',
+    required_name: 'Name is required',
     months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
     days_short: ['Su','Mo','Tu','We','Th','Fr','Sa'],
@@ -1144,9 +2252,27 @@ const STRINGS = {
 
 let currentLang = localStorage.getItem('operis_lang') || 'th';
 let currentTheme = localStorage.getItem('operis_theme') || 'system';
+let currentCurrency = localStorage.getItem('operis_currency') || 'THB';
+// Hardcoded FX rate; swap to a live source later if needed.
+const USD_RATE = 35; // 1 USD = 35 THB
 
 function t(key) { return STRINGS[currentLang][key] || STRINGS.th[key] || key; }
 function S() { return STRINGS[currentLang]; }
+
+function formatMoney(priceCents) {
+  var baht = (priceCents || 0) / 100;
+  if (currentCurrency === 'USD') {
+    var usd = baht / USD_RATE;
+    return '$' + usd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  }
+  return '฿' + Math.round(baht).toLocaleString('en-US');
+}
+
+function bookingsLabel(count) {
+  if (count <= 0) return '';
+  if (currentLang === 'th') return count + ' นัดหมาย';
+  return count + (count === 1 ? ' booking' : ' bookings');
+}
 
 // ── Theme ──
 const darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
@@ -1173,6 +2299,25 @@ function setLang(val) {
   syncSegControl($('langControl'), val);
   applyI18n();
   loadDashboard();
+  refreshActiveView();
+}
+
+function setCurrency(val) {
+  currentCurrency = val;
+  localStorage.setItem('operis_currency', val);
+  syncSegControl($('currencyControl'), val);
+  renderRevenueCard();
+  // Re-render services list or editor if currently visible
+  if (_currentView === 'services') {
+    if (_editingService !== null) paintServiceEditor(); else paintServicesList();
+  }
+}
+
+function refreshActiveView() {
+  if (_currentView === 'clients' && _clients !== null) paintClients();
+  else if (_currentView === 'services' && _services !== null) {
+    if (_editingService !== null) paintServiceEditor(); else paintServicesList();
+  }
 }
 
 function syncSegControl(container, val) {
@@ -1197,7 +2342,6 @@ const errorBanner = $('errorBanner');
 const toast = $('toast');
 const bookingsView = $('bookingsView');
 const clientsView = $('clientsView');
-const settingsView = $('settingsView');
 const calendarSection = $('calendarSection');
 
 // ── Dates ──
@@ -1233,10 +2377,17 @@ function renderSkeletonStats() {
 }
 
 function renderStats(todayCount, weekCount, clientCount) {
+  function box(title, num, label) {
+    return '<div class="stat-box fade-in">' +
+      '<div class="stat-title">'+escHtml(title)+'</div>' +
+      '<div class="stat-number">'+num+'</div>' +
+      '<div class="stat-label">'+escHtml(label)+'</div>' +
+    '</div>';
+  }
   statsStrip.innerHTML =
-    '<div class="stat-box fade-in"><div class="stat-number">'+todayCount+'</div><div class="stat-label">'+t('stat_today')+'</div></div>' +
-    '<div class="stat-box fade-in"><div class="stat-number">'+weekCount+'</div><div class="stat-label">'+t('stat_week')+'</div></div>' +
-    '<div class="stat-box fade-in"><div class="stat-number">'+clientCount+'</div><div class="stat-label">'+t('stat_clients')+'</div></div>';
+    box(t('stat_today'),   todayCount,   t('stat_today_sub')) +
+    box(t('stat_week'),    weekCount,    t('stat_week_sub')) +
+    box(t('stat_clients'), clientCount,  t('stat_clients_sub'));
   if (typeof measureHeader === 'function') measureHeader();
 }
 
@@ -1250,37 +2401,53 @@ function showToast(msg, duration) {
 }
 
 // ── Navigation ──
+var _currentView = 'bookings';
 function switchView(view) {
+  _currentView = view;
   var tabs = document.querySelectorAll('.nav-tab');
   tabs.forEach(function(t) { t.classList.remove('active'); });
   bookingsView.classList.add('hidden');
   clientsView.classList.remove('active');
-  settingsView.classList.remove('active');
+  var servicesView = $('servicesView');
+  if (servicesView) servicesView.classList.remove('active');
+
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-link').forEach(function(link) {
+    link.classList.toggle('active', link.dataset.view === view);
+  });
+
+  // Page title on desktop — track key via data-i18n so language switches work
+  var pageTitle = $('pageTitle');
+  if (pageTitle) {
+    var titleKey = view === 'bookings' ? 'nav_dashboard'
+                 : view === 'clients' ? 'nav_clients'
+                 : 'nav_services';
+    pageTitle.setAttribute('data-i18n', titleKey);
+    pageTitle.textContent = t(titleKey);
+  }
 
   if (view === 'bookings') {
     $('navBookings').classList.add('active');
     bookingsView.classList.remove('hidden');
-    bookingsView.style.animation = 'none';
-    bookingsView.offsetHeight;
-    bookingsView.style.animation = '';
     if (typeof showCalBar === 'function') showCalBar();
     if (typeof updateVisibleDay === 'function') updateVisibleDay();
   } else if (view === 'clients') {
     $('navClients').classList.add('active');
-    clientsView.offsetHeight;
     clientsView.classList.add('active');
     if (typeof hideCalBar === 'function') hideCalBar();
     renderClients();
-  } else if (view === 'settings') {
-    $('navSettings').classList.add('active');
-    settingsView.offsetHeight;
-    settingsView.classList.add('active');
+  } else if (view === 'services') {
+    var navServices = $('navServices');
+    if (navServices) navServices.classList.add('active');
+    if (servicesView) servicesView.classList.add('active');
     if (typeof hideCalBar === 'function') hideCalBar();
+    renderServices();
   }
 }
 
 // ── Demo Data ──
-// Generate demo bookings relative to today
+// Fallback dataset that shows whenever Supabase returns nothing. Feel free
+// to replace with real data once the DB is populated.
 var _now = nowBangkok();
 var _y = _now.getFullYear(), _m = _now.getMonth(), _d = _now.getDate();
 
@@ -1288,80 +2455,116 @@ function bkkToUtc(y,m,d,h,min) {
   return new Date(Date.UTC(y,m,d,h-7,min)).toISOString();
 }
 
+var DEMO_SHOP_NAME = 'ร้านตัดผม The Cut';
+
 var DEMO_SERVICES = [
-  { name: "Men's Haircut", duration_min: 30 },
-  { name: 'Wash + Cut + Style', duration_min: 60 },
-  { name: 'Hair Coloring', duration_min: 90 },
-  { name: 'Hair Straightening', duration_min: 120 },
-  { name: "Kid's Haircut", duration_min: 20 },
-  { name: 'Shave + Treatment', duration_min: 45 },
-  { name: 'Head Massage', duration_min: 30 },
+  { id: 'demo-svc-1', business_id: BUSINESS_ID, name: 'ตัดผมชาย',        duration_min: 30, price_cents: 35000,  is_active: true },
+  { id: 'demo-svc-2', business_id: BUSINESS_ID, name: 'ตัดผมหญิง',       duration_min: 45, price_cents: 50000,  is_active: true },
+  { id: 'demo-svc-3', business_id: BUSINESS_ID, name: 'โกนหนวด',         duration_min: 20, price_cents: 20000,  is_active: true },
+  { id: 'demo-svc-4', business_id: BUSINESS_ID, name: 'ตัดผม + โกนหนวด',  duration_min: 50, price_cents: 50000,  is_active: true },
+  { id: 'demo-svc-5', business_id: BUSINESS_ID, name: 'ทำสีผม',          duration_min: 90, price_cents: 120000, is_active: true },
+  { id: 'demo-svc-6', business_id: BUSINESS_ID, name: 'ทรีทเมนต์',        duration_min: 60, price_cents: 80000,  is_active: true },
 ];
 
-var DEMO_CLIENTS_DATA = [
-  { name: 'James Wilson', phone: '+66812345678' },
-  { name: 'Sarah Chen', phone: '+66891234567' },
-  { name: 'David Kim', phone: '+66823456789' },
-  { name: 'Emily Park', phone: '+66845678901' },
-  { name: 'Michael Torres', phone: '+66867890123' },
-  { name: 'Lisa Nakamura', phone: '+66878901234' },
-  { name: 'Robert Singh', phone: '+66834567890' },
-  { name: 'Anna Petrova', phone: '+66856789012' },
-  { name: 'Kevin Okafor', phone: '+66889012345' },
-  { name: 'Maria Santos', phone: '+66801234567' },
-  { name: 'Thomas Berg', phone: '+66819876543' },
-  { name: 'Yuki Tanaka', phone: '+66832109876' },
-  { name: 'Alex Morgan', phone: '+66854321098' },
-  { name: 'Priya Sharma', phone: '+66876543210' },
+var DEMO_CLIENTS = [
+  { id: 'demo-cli-1', business_id: BUSINESS_ID, name: 'สมชาย วงศ์สวัสดิ์',   phone: '+66 81 234 5678' },
+  { id: 'demo-cli-2', business_id: BUSINESS_ID, name: 'สมหญิง แก้วมณี',      phone: '+66 89 876 5432' },
+  { id: 'demo-cli-3', business_id: BUSINESS_ID, name: 'ประยุทธ์ สุขใจ',      phone: '+66 92 345 6789' },
+  { id: 'demo-cli-4', business_id: BUSINESS_ID, name: 'นภา จันทร์เพ็ญ',      phone: '+66 85 111 2222' },
+  { id: 'demo-cli-5', business_id: BUSINESS_ID, name: 'วิชัย ศรีสุข',        phone: '+66 86 333 4444' },
+  { id: 'demo-cli-6', business_id: BUSINESS_ID, name: 'อรุณ พิมพ์สวย',       phone: '+66 91 555 6666' },
+  { id: 'demo-cli-7', business_id: BUSINESS_ID, name: 'มาลี ทองดี',         phone: '+66 88 777 8888' },
+  { id: 'demo-cli-8', business_id: BUSINESS_ID, name: 'ชัยวัฒน์ รักไทย',     phone: '+66 84 999 0000' },
 ];
 
-// Today's bookings
-var DEMO_TODAY = [
-  { start_time: bkkToUtc(_y,_m,_d,9,0), services: DEMO_SERVICES[0], clients: DEMO_CLIENTS_DATA[0] },
-  { start_time: bkkToUtc(_y,_m,_d,10,0), services: DEMO_SERVICES[1], clients: DEMO_CLIENTS_DATA[1] },
-  { start_time: bkkToUtc(_y,_m,_d,11,30), services: DEMO_SERVICES[2], clients: DEMO_CLIENTS_DATA[3] },
-  { start_time: bkkToUtc(_y,_m,_d,14,0), services: DEMO_SERVICES[5], clients: DEMO_CLIENTS_DATA[4] },
-  { start_time: bkkToUtc(_y,_m,_d,15,0), services: DEMO_SERVICES[0], clients: DEMO_CLIENTS_DATA[6] },
-  { start_time: bkkToUtc(_y,_m,_d,16,30), services: DEMO_SERVICES[6], clients: DEMO_CLIENTS_DATA[7] },
-];
-
-// Upcoming bookings (next 6 days)
-var DEMO_UPCOMING = [];
-var _upSlots = [
-  [1, 9,0, 1, 2], [1,10,30, 3, 1], [1,13,0, 5, 0], [1,15,0, 8, 5],
-  [2,10,0, 0, 1], [2,11,0, 9, 2], [2,14,30, 10, 3],
-  [3, 9,30, 2, 0], [3,11,0, 11, 6], [3,14,0, 4, 1], [3,16,0, 12, 5],
-  [4,10,0, 6, 0], [4,13,0, 13, 4], [4,15,30, 3, 2],
-  [5, 9,0, 1, 1], [5,11,0, 7, 3], [5,14,0, 0, 0], [5,15,30, 5, 6],
-  [6,10,0, 9, 1], [6,13,30, 10, 2],
-];
-for (var _s = 0; _s < _upSlots.length; _s++) {
-  var s = _upSlots[_s];
-  var dd = new Date(_y,_m,_d); dd.setDate(dd.getDate() + s[0]);
-  DEMO_UPCOMING.push({
-    start_time: bkkToUtc(dd.getFullYear(),dd.getMonth(),dd.getDate(),s[1],s[2]),
-    services: DEMO_SERVICES[s[4]],
-    clients: DEMO_CLIENTS_DATA[s[3]],
-  });
+// Helper: build a demo booking on a day offset from today
+var _demoBkSeq = 1;
+function _mkDemoBooking(dayOffset, hour, min, svcIdx, cliIdx, createdMinAgo) {
+  var svc = DEMO_SERVICES[svcIdx];
+  var cli = DEMO_CLIENTS[cliIdx];
+  var date = new Date(_y, _m, _d); date.setDate(date.getDate() + dayOffset);
+  var start = bkkToUtc(date.getFullYear(), date.getMonth(), date.getDate(), hour, min);
+  var totalEndMin = hour * 60 + min + svc.duration_min;
+  var endH = Math.floor(totalEndMin / 60);
+  var endM = totalEndMin % 60;
+  var end = bkkToUtc(date.getFullYear(), date.getMonth(), date.getDate(), endH, endM);
+  var b = {
+    id: 'demo-bk-' + (_demoBkSeq++),
+    business_id: BUSINESS_ID,
+    start_time: start,
+    end_time: end,
+    service_id: svc.id,
+    client_id: cli.id,
+    services: svc,
+    clients: cli,
+    status: 'confirmed',
+    source: 'ai',
+    notes: ''
+  };
+  if (createdMinAgo != null) {
+    b.created_at = new Date(Date.now() - createdMinAgo * 60000).toISOString();
+  }
+  return b;
 }
 
-// Full client list for the clients tab
-var DEMO_CLIENTS_LIST = [
-  { name: 'James Wilson', phone: '+66812345678', visits: 14, last: _d + ' Apr' },
-  { name: 'Sarah Chen', phone: '+66891234567', visits: 11, last: _d + ' Apr' },
-  { name: 'David Kim', phone: '+66823456789', visits: 9, last: (_d-1) + ' Apr' },
-  { name: 'Emily Park', phone: '+66845678901', visits: 8, last: _d + ' Apr' },
-  { name: 'Michael Torres', phone: '+66867890123', visits: 7, last: _d + ' Apr' },
-  { name: 'Lisa Nakamura', phone: '+66878901234', visits: 6, last: (_d-2) + ' Apr' },
-  { name: 'Robert Singh', phone: '+66834567890', visits: 5, last: _d + ' Apr' },
-  { name: 'Anna Petrova', phone: '+66856789012', visits: 5, last: _d + ' Apr' },
-  { name: 'Kevin Okafor', phone: '+66889012345', visits: 4, last: (_d-3) + ' Apr' },
-  { name: 'Maria Santos', phone: '+66801234567', visits: 3, last: (_d-1) + ' Apr' },
-  { name: 'Thomas Berg', phone: '+66819876543', visits: 3, last: (_d-2) + ' Apr' },
-  { name: 'Yuki Tanaka', phone: '+66832109876', visits: 2, last: (_d-3) + ' Apr' },
-  { name: 'Alex Morgan', phone: '+66854321098', visits: 2, last: (_d-4) + ' Apr' },
-  { name: 'Priya Sharma', phone: '+66876543210', visits: 1, last: (_d-5) + ' Apr' },
+var DEMO_BOOKINGS = [
+  // Past 6 days — makes the revenue chart show a realistic history
+  _mkDemoBooking(-6, 10, 0,  0, 0),
+  _mkDemoBooking(-6, 14, 30, 2, 1),
+  _mkDemoBooking(-5, 11, 0,  1, 2),
+  _mkDemoBooking(-5, 15, 0,  3, 3),
+  _mkDemoBooking(-4, 10, 30, 0, 4),
+  _mkDemoBooking(-4, 14, 0,  4, 5),
+  _mkDemoBooking(-3, 9, 30,  5, 6),
+  _mkDemoBooking(-3, 13, 0,  1, 7),
+  _mkDemoBooking(-2, 11, 0,  0, 0),
+  _mkDemoBooking(-2, 16, 0,  2, 2),
+  _mkDemoBooking(-1, 10, 0,  0, 3),
+  _mkDemoBooking(-1, 14, 30, 3, 4),
+  _mkDemoBooking(-1, 16, 0,  1, 5),
+
+  // Today — 5 bookings with recent created_at for the AI activity feed
+  _mkDemoBooking(0, 9, 30,  0, 0,  25),    // ~25 min ago
+  _mkDemoBooking(0, 11, 0,  1, 1,  90),    // 1.5h ago
+  _mkDemoBooking(0, 13, 30, 4, 2,  260),   // ~4.3h ago
+  _mkDemoBooking(0, 15, 30, 2, 3,  50),    // ~50 min ago
+  _mkDemoBooking(0, 16, 30, 0, 4,  15),    // 15 min ago
+
+  // Tomorrow — 3 bookings, some with day-old created timestamps
+  _mkDemoBooking(1, 10, 0,  0, 5, 1440),   // 1 day ago
+  _mkDemoBooking(1, 12, 0,  3, 6, 1800),   // 30h ago
+  _mkDemoBooking(1, 14, 30, 1, 7, 400),
+
+  // Day after — 3 bookings
+  _mkDemoBooking(2, 9, 0,   5, 0, 2700),   // 45h ago
+  _mkDemoBooking(2, 11, 30, 0, 1),
+  _mkDemoBooking(2, 16, 0,  2, 2),
+
+  // Scatter across days 3–14
+  _mkDemoBooking(3,  10, 0,  1, 3),
+  _mkDemoBooking(4,  14, 0,  0, 4),
+  _mkDemoBooking(5,  11, 0,  4, 5),
+  _mkDemoBooking(7,  9, 0,   3, 6),
+  _mkDemoBooking(9,  13, 0,  5, 7),
+  _mkDemoBooking(12, 15, 0,  0, 0),
+  _mkDemoBooking(14, 10, 30, 2, 1),
 ];
+
+// Compute counts/revenue from the demo booking set so fallback data stays
+// self-consistent with whatever ends up in allBookings.
+function demoTodayCount() {
+  var tk = dateKey(nowBangkok());
+  return DEMO_BOOKINGS.filter(function(b){ return dateKey(toBangkok(b.start_time)) === tk; }).length;
+}
+function demoWeekCount() {
+  var now = nowBangkok();
+  var ws = weekStartOf(now);
+  var we = new Date(ws); we.setDate(we.getDate() + 7);
+  return DEMO_BOOKINGS.filter(function(b){
+    var d = toBangkok(b.start_time);
+    return d >= ws && d < we;
+  }).length;
+}
 
 // ── Data loading (tries Supabase, falls back to demo) ──
 async function loadDashboard() {
@@ -1369,13 +2572,14 @@ async function loadDashboard() {
   renderSkeletonStats();
 
   var now = nowBangkok();
-  var shopName = 'Somchai Barbershop';
-  var todayBookings = DEMO_TODAY;
-  var upcomingBookings = DEMO_UPCOMING;
-  var weekCount = DEMO_TODAY.length + DEMO_UPCOMING.length;
-  var clientCount = DEMO_CLIENTS_LIST.length;
+  var shopName = DEMO_SHOP_NAME;
+  var bookings = DEMO_BOOKINGS.slice();
+  var weekCount = demoWeekCount();
+  var clientCount = DEMO_CLIENTS.length;
+  var clientRows = DEMO_CLIENTS.slice();
+  var revenueBookings = DEMO_BOOKINGS.slice(); // demo already covers the last 6 days
 
-  // Try Supabase first
+  // Try Supabase first — any non-empty result replaces the corresponding demo slice
   try {
     var todayStart = startOfDayBangkok(now);
     var tomorrowStart = new Date(todayStart); tomorrowStart.setDate(tomorrowStart.getDate()+1);
@@ -1385,38 +2589,133 @@ async function loadDashboard() {
     var weekStart = new Date(todayStart); weekStart.setDate(weekStart.getDate()+mondayOffset);
     var sundayEnd = new Date(weekStart); sundayEnd.setDate(sundayEnd.getDate()+7);
 
-    var [bizRes, todayRes, upcomingRes, weekRes, clientRes] = await Promise.all([
-      supabase.from('businesses').select('name').eq('id', BUSINESS_ID).single(),
-      supabase.from('bookings').select('*, clients(name, phone), services(name, duration_min)')
+    var revStart = new Date(todayStart); revStart.setDate(revStart.getDate() - 6);
+    var rangeStart = new Date(todayStart); rangeStart.setDate(rangeStart.getDate() - 6);
+    var rangeEnd = new Date(todayStart); rangeEnd.setDate(rangeEnd.getDate() + 15);
+
+    var [bizRes, bkRes, weekRes, clientCountRes, clientsRes, revRes] = await Promise.all([
+      supabase.from('businesses').select('*').eq('id', BUSINESS_ID).single(),
+      supabase.from('bookings').select('*, clients(id, name, phone), services(id, name, duration_min, price_cents)')
         .eq('business_id', BUSINESS_ID).eq('status', 'confirmed')
-        .gte('start_time', toUTCIso(todayStart)).lt('start_time', toUTCIso(tomorrowStart))
-        .order('start_time', { ascending: true }),
-      supabase.from('bookings').select('*, clients(name, phone), services(name, duration_min)')
-        .eq('business_id', BUSINESS_ID).eq('status', 'confirmed')
-        .gte('start_time', toUTCIso(tomorrowStart)).lt('start_time', toUTCIso(weekEnd))
+        .gte('start_time', toUTCIso(rangeStart)).lt('start_time', toUTCIso(rangeEnd))
         .order('start_time', { ascending: true }),
       supabase.from('bookings').select('id', { count: 'exact', head: true })
         .eq('business_id', BUSINESS_ID).eq('status', 'confirmed')
         .gte('start_time', toUTCIso(weekStart)).lt('start_time', toUTCIso(sundayEnd)),
       supabase.from('clients').select('id', { count: 'exact', head: true }).eq('business_id', BUSINESS_ID),
+      supabase.from('clients').select('*').eq('business_id', BUSINESS_ID).order('name'),
+      supabase.from('bookings').select('start_time, services(price_cents)')
+        .eq('business_id', BUSINESS_ID).eq('status', 'confirmed')
+        .gte('start_time', toUTCIso(revStart)).lt('start_time', toUTCIso(tomorrowStart)),
     ]);
 
-    if (!bizRes.error && bizRes.data) shopName = bizRes.data.name;
-    if (!todayRes.error && todayRes.data && todayRes.data.length > 0) todayBookings = todayRes.data;
-    if (!upcomingRes.error && upcomingRes.data && upcomingRes.data.length > 0) upcomingBookings = upcomingRes.data;
+    if (!bizRes.error && bizRes.data) {
+      shopName = bizRes.data.name;
+      _business = bizRes.data;
+    }
+    if (!bkRes.error && bkRes.data && bkRes.data.length > 0) bookings = bkRes.data;
     if (!weekRes.error && weekRes.count > 0) weekCount = weekRes.count;
-    if (!clientRes.error && clientRes.count > 0) clientCount = clientRes.count;
+    if (!clientCountRes.error && clientCountRes.count > 0) clientCount = clientCountRes.count;
+    if (!clientsRes.error && clientsRes.data && clientsRes.data.length > 0) clientRows = clientsRes.data;
+    if (!revRes.error && revRes.data && revRes.data.length > 0) revenueBookings = revRes.data;
   } catch (e) {
     console.log('Using demo data', e);
   }
 
+  // Refresh global state from whichever source won
+  allBookings = bookings;
+  allBookings.forEach(function(b, i){ b._idx = i; if (b.notes == null) b.notes = ''; });
+  _clients = clientRows;
+  _revenueBookings = revenueBookings;
+
+  var todayCount = allBookings.filter(function(b){
+    return dateKey(toBangkok(b.start_time)) === dateKey(nowBangkok());
+  }).length;
+
   shopNameEl.textContent = shopName;
-  renderStats(todayBookings.length, weekCount, clientCount);
+  var sidebarShop = document.getElementById('sidebarShopName');
+  if (sidebarShop) sidebarShop.textContent = shopName;
+  updateProfileAvatar(shopName);
+  renderStats(todayCount, weekCount, clientCount);
   renderCalendar();
+  renderRecentClients();
+  renderRevenueCard();
+  renderAIActivity();
+}
+
+// ── Profile ──
+var _business = null;
+var _revenueBookings = []; // last 7 days of confirmed bookings w/ services.price_cents
+
+function updateProfileAvatar(name) {
+  var init = (name || '·').trim();
+  var letters = init ? init[0].toUpperCase() : '·';
+  var parts = init.split(/\s+/);
+  if (parts.length >= 2 && parts[0] && parts[1]) {
+    letters = (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  var d = $('profileInitialsDesktop'); if (d) d.textContent = letters;
+  var m = $('profileInitialsMobile'); if (m) m.textContent = letters;
+}
+
+function openProfile() {
+  $('profileBusiness').value = (_business && _business.name) || '';
+  $('profileOwner').value = (_business && (_business.owner_name || _business.owner)) || '';
+  $('profilePhone').value = (_business && _business.phone) || '';
+  $('profileOverlay').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProfile() {
+  $('profileOverlay').hidden = true;
+  document.body.style.overflow = '';
+}
+
+async function saveProfileField(column, value) {
+  try {
+    var payload = {}; payload[column] = value;
+    var res = await supabase.from('businesses').update(payload).eq('id', BUSINESS_ID);
+    if (res.error) throw res.error;
+    if (!_business) _business = {};
+    _business[column] = value;
+    if (column === 'name') {
+      shopNameEl.textContent = value;
+      var sidebarShop = document.getElementById('sidebarShopName');
+      if (sidebarShop) sidebarShop.textContent = value;
+      updateProfileAvatar(value);
+    }
+    showToast(t('saved'), 1000);
+  } catch (e) {
+    console.error('Save profile field failed', column, e);
+    showToast(t('error_save'), 1800);
+  }
+}
+
+function wireProfileBlurSaves() {
+  var biz = $('profileBusiness');
+  var own = $('profileOwner');
+  var ph = $('profilePhone');
+  if (biz) biz.addEventListener('blur', function() {
+    var v = biz.value.trim();
+    if (v === ((_business && _business.name) || '')) return;
+    saveProfileField('name', v);
+  });
+  if (own) own.addEventListener('blur', function() {
+    var v = own.value.trim();
+    if (v === ((_business && _business.owner_name) || '')) return;
+    saveProfileField('owner_name', v);
+  });
+  if (ph) ph.addEventListener('blur', function() {
+    var v = ph.value.trim();
+    if (v === ((_business && _business.phone) || '')) return;
+    saveProfileField('phone', v);
+  });
 }
 
 // ── Calendar ──
-var allBookings = DEMO_TODAY.concat(DEMO_UPCOMING);
+// Starts populated with demo bookings; loadDashboard() overwrites this with
+// real Supabase results when they exist.
+var allBookings = DEMO_BOOKINGS.slice();
 allBookings.forEach(function(b,i){ b._idx = i; if(!b.notes) b.notes=''; });
 
 function bkgsFor(date){
@@ -1436,8 +2735,9 @@ function emptyStateHtml(icon, title, desc) {
 }
 
 function measureHeader(){
-  var h = document.querySelector('.header');
-  if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+  var h = document.querySelector('.mobile-header');
+  var headerH = (h && h.offsetParent !== null) ? h.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-h', headerH + 'px');
   var s = document.getElementById('statsStrip');
   if (s && s.offsetParent !== null && s.offsetHeight > 0) {
     document.documentElement.style.setProperty('--stats-h', s.offsetHeight + 'px');
@@ -1504,12 +2804,16 @@ function blockHtml(b, posStyle){
   var bk = toBangkok(b.start_time);
   var dur = b.services ? b.services.duration_min : 60;
   var top = (bk.getHours() + bk.getMinutes()/60) * ROW;
-  var h = Math.max((dur/60)*ROW, 22);
-  var sc = h >= 36, tc = h >= 52;
+  // Ensure short bookings still have room for service name + client name
+  var h = Math.max((dur/60)*ROW, 50);
+  // Time is only shown when the block is comfortably tall
+  var showTime = h >= 70;
+  var svcName = (b.services && b.services.name) || '—';
+  var cliName = (b.clients && b.clients.name) || '—';
   return '<div class="cal-block" style="top:'+top+'px;height:'+h+'px'+(posStyle||'')+'" data-idx="'+b._idx+'">' +
-    '<div class="cal-block-service">'+escHtml(b.services.name)+'</div>' +
-    (sc ? '<div class="cal-block-client">'+escHtml(b.clients.name)+'</div>' : '') +
-    (tc ? '<div class="cal-block-time">'+formatTime(bk)+'–'+formatTime(addMinutes(bk,dur))+'</div>' : '') +
+    '<div class="cal-block-service">'+escHtml(svcName)+'</div>' +
+    '<div class="cal-block-client">'+escHtml(cliName)+'</div>' +
+    (showTime ? '<div class="cal-block-time">'+formatTime(bk)+'–'+formatTime(addMinutes(bk,dur))+'</div>' : '') +
   '</div>';
 }
 
@@ -1634,7 +2938,7 @@ function buildMonthContent(){
     if (dateKey(dObj) === todayKey) classes += ' today';
     h += '<div class="'+classes+'" data-date="'+dateKey(dObj)+'">' +
       '<div>'+dd+'</div>' +
-      (count > 0 ? '<div class="cal-month-count">'+count+'</div>' : '') +
+      (count > 0 ? '<div class="cal-month-count">'+escHtml(bookingsLabel(count))+'</div>' : '') +
     '</div>';
   }
   var tot = adj + dim;
@@ -1688,7 +2992,6 @@ function renderCalendar(){
   }
 
   measureHeader();
-  measureCalBar();
   if (calView === 'day') _currentDayIdx = 0;
   updateBarState();
 
@@ -1697,30 +3000,48 @@ function renderCalendar(){
       if (!_calInitialScrollDone) {
         var day0 = calendarSection.querySelector('.cal-day[data-idx="0"]');
         if (day0) {
+          // Scroll calendar container to 1 hour before current time
           var n = nowBangkok();
           var nowY = (n.getHours() + n.getMinutes()/60) * ROW;
-          var day0Abs = day0.getBoundingClientRect().top + window.scrollY;
-          var target = day0Abs + nowY - stickyOffset() - 80;
-          window.scrollTo(0, Math.max(0, target));
+          var target = Math.max(0, nowY - ROW);
+          calendarSection.scrollTop = target;
           _calInitialScrollDone = true;
         }
       }
       updateVisibleDay();
     });
+  } else if (calView === 'week') {
+    requestAnimationFrame(function(){
+      // Earliest booking across the visible Mon–Sun; fall back to 8am
+      var ws = weekStartOf(calWeekDate);
+      var earliestHr = null;
+      for (var i = 0; i < 7; i++) {
+        var d = new Date(ws); d.setDate(d.getDate() + i);
+        var bks = bkgsFor(d);
+        for (var j = 0; j < bks.length; j++) {
+          var bkd = toBangkok(bks[j].start_time);
+          var hr = bkd.getHours() + bkd.getMinutes()/60;
+          if (earliestHr === null || hr < earliestHr) earliestHr = hr;
+        }
+      }
+      var targetHour = earliestHr !== null ? (earliestHr - 0.5) : 8;
+      var weekBody = calendarSection.querySelector('.cal-week-body');
+      var bodyTop = weekBody ? weekBody.offsetTop : 0;
+      calendarSection.scrollTop = Math.max(0, Math.round(bodyTop + targetHour * ROW));
+    });
+  } else {
+    calendarSection.scrollTop = 0;
   }
 }
 
 function showCalBar(){
   var bar = document.getElementById('calFixedBar');
-  if (!bar) return;
-  bar.hidden = false;
-  measureCalBar();
+  if (bar) bar.hidden = false;
 }
 
 function hideCalBar(){
   var bar = document.getElementById('calFixedBar');
   if (bar) bar.hidden = true;
-  document.documentElement.style.setProperty('--cal-bar-h', '0px');
 }
 
 // One-time wiring of the static fixed bar
@@ -1770,30 +3091,16 @@ function setCalView(v){
   if (v === calView) return;
   calView = v;
   try { localStorage.setItem('operis_cal_view', v); } catch(e) {}
-  if (v !== 'day') window.scrollTo(0, 0);
   renderCalendar();
-}
-
-function measureCalBar(){
-  var bar = document.getElementById('calFixedBar');
-  if (bar) document.documentElement.style.setProperty('--cal-bar-h', bar.offsetHeight + 'px');
-}
-
-function stickyOffset(){
-  var headerH = document.querySelector('.header').offsetHeight;
-  var stats = document.getElementById('statsStrip');
-  var statsH = (stats && stats.offsetParent !== null) ? stats.offsetHeight : 0;
-  var bar = document.getElementById('calFixedBar');
-  var barH = (bar && !bar.hidden) ? bar.offsetHeight : 0;
-  return headerH + statsH + barH;
 }
 
 function jumpToDay(idx){
   if (idx < 0 || idx >= CAL_RANGE) return;
   var day = calendarSection.querySelector('.cal-day[data-idx="'+idx+'"]');
   if (!day) return;
-  var target = day.getBoundingClientRect().top + window.scrollY - stickyOffset() - 2;
-  window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+  // Day element top relative to the scroll container
+  var target = day.offsetTop - 2;
+  calendarSection.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
 }
 
 function updateNavButtons(){
@@ -1829,13 +3136,11 @@ function updateVisibleDay(){
   if (calView !== 'day') return;
   var days = calendarSection.querySelectorAll('.cal-day');
   if (!days.length) return;
-  var bar = document.getElementById('calFixedBar');
-  if (!bar || bar.hidden) return;
-  var threshold = stickyOffset() + 8;
+  // Use scroll position inside the calendar container (plus a small threshold)
+  var scrollTop = calendarSection.scrollTop + 8;
   var newIdx = 0;
   for (var i = 0; i < days.length; i++) {
-    var top = days[i].getBoundingClientRect().top;
-    if (top <= threshold) newIdx = i;
+    if (days[i].offsetTop <= scrollTop) newIdx = i;
     else break;
   }
   if (newIdx !== _currentDayIdx) {
@@ -1852,64 +3157,148 @@ function onScrollCal(){
     updateVisibleDay();
   });
 }
-window.addEventListener('scroll', onScrollCal, { passive: true });
+calendarSection.addEventListener('scroll', onScrollCal, { passive: true });
 
-// Edit
-var _editing=null;
-function openEditForm(b){
-  _editing=b;
-  var bk=toBangkok(b.start_time);
-  $('calEditDate').value=bk.getFullYear()+'-'+pad(bk.getMonth()+1)+'-'+pad(bk.getDate());
-  $('calEditTime').value=pad(bk.getHours())+':'+pad(bk.getMinutes());
-  $('calEditService').value=b.services?b.services.name:'';
-  $('calEditNotes').value=b.notes||'';
+// ── Edit Booking modal ──
+var _editing = null;
+
+function bookingStartBkk(b) { return toBangkok(b.start_time); }
+function bookingEndBkk(b) {
+  if (b.end_time) return toBangkok(b.end_time);
+  var dur = (b.services && b.services.duration_min) || 60;
+  return addMinutes(bookingStartBkk(b), dur);
+}
+
+function populateServiceDropdown(selectedId) {
+  var sel = $('calEditService');
+  if (!sel) return;
+  var options = _services || [];
+  var html = '<option value="">—</option>';
+  for (var i = 0; i < options.length; i++) {
+    var svc = options[i];
+    html += '<option value="' + escHtml(svc.id) + '"' + (String(svc.id) === String(selectedId) ? ' selected' : '') + '>' + escHtml(svc.name || '—') + '</option>';
+  }
+  // If the booking references a service not in the current _services list (demo/missing), append it
+  if (selectedId && !options.some(function(s){ return String(s.id) === String(selectedId); }) && _editing && _editing.services) {
+    html += '<option value="' + escHtml(selectedId) + '" selected>' + escHtml(_editing.services.name || '—') + '</option>';
+  }
+  sel.innerHTML = html;
+}
+
+async function openEditForm(b) {
+  _editing = b;
+
+  // Ensure services list is loaded so the dropdown has options
+  if (_services === null) { try { await fetchServices(); } catch(e) {} }
+  populateServiceDropdown(b.service_id || (b.services && b.services.id));
+
+  var start = bookingStartBkk(b);
+  var end = bookingEndBkk(b);
+  $('calEditDate').value  = start.getFullYear() + '-' + pad(start.getMonth()+1) + '-' + pad(start.getDate());
+  $('calEditStart').value = pad(start.getHours()) + ':' + pad(start.getMinutes());
+  $('calEditEnd').value   = pad(end.getHours())   + ':' + pad(end.getMinutes());
+  $('calEditClient').value = (b.clients && b.clients.name) || '';
+  $('calEditStatus').value = b.status || 'confirmed';
+  $('calEditNotes').value = b.notes || '';
+
   $('calEditOverlay').classList.add('open');
 }
-function closeEdit(){ $('calEditOverlay').classList.remove('open'); _editing=null; }
 
-async function autoSave(){
-  if (!_editing) return;
-  var dateVal = $('calEditDate').value;
-  var timeVal = $('calEditTime').value;
-  if (!dateVal || !timeVal) return;
-  var dv = dateVal.split('-');
-  var tv = timeVal.split(':');
-  if (dv.length !== 3 || tv.length !== 2) return;
-
-  var newStart = bkkToUtc(+dv[0], dv[1]-1, +dv[2], +tv[0], +tv[1]);
-  var newService = $('calEditService').value;
-  var newNotes = $('calEditNotes').value;
-
-  _editing.start_time = newStart;
-  _editing.notes = newNotes;
-  if (_editing.services) _editing.services.name = newService;
-
-  renderCalendar();
-
-  if (_editing.id) {
-    try {
-      var res = await supabase
-        .from('bookings')
-        .update({ start_time: newStart, notes: newNotes })
-        .eq('id', _editing.id);
-      if (res.error) throw res.error;
-    } catch (e) {
-      console.error('Auto-save failed', e);
-      showToast(t('error_save'), 2000);
-      return;
-    }
-  }
-
-  showToast(t('saved'), 1000);
+function closeEdit() {
+  $('calEditOverlay').classList.remove('open');
+  _editing = null;
 }
 
-['calEditService', 'calEditDate', 'calEditTime', 'calEditNotes'].forEach(function(id){
-  var el = $(id);
-  if (el) el.addEventListener('change', autoSave);
-});
+function parseDateTimeToUtc(dateVal, timeVal) {
+  if (!dateVal || !timeVal) return null;
+  var dv = dateVal.split('-');
+  var tv = timeVal.split(':');
+  if (dv.length !== 3 || tv.length !== 2) return null;
+  return bkkToUtc(+dv[0], dv[1]-1, +dv[2], +tv[0], +tv[1]);
+}
 
-$('calEditCancel').addEventListener('click', closeEdit);
+async function saveBookingPatch(patch) {
+  if (!_editing) return;
+  Object.assign(_editing, patch);
+  renderCalendar();
+  if (!_editing.id) { showToast(t('saved'), 1000); return; }
+  try {
+    var res = await supabase.from('bookings').update(patch).eq('id', _editing.id);
+    if (res.error) throw res.error;
+    showToast(t('saved'), 1000);
+  } catch (e) {
+    console.error('Booking auto-save failed', patch, e);
+    showToast(t('error_save'), 1800);
+  }
+}
+
+function wireBookingBlurSaves() {
+  // Save start_time when date or start time changes
+  function handleStart() {
+    var newStart = parseDateTimeToUtc($('calEditDate').value, $('calEditStart').value);
+    if (!newStart) return;
+    if (newStart === _editing.start_time) return;
+    saveBookingPatch({ start_time: newStart });
+  }
+  function handleEnd() {
+    var newEnd = parseDateTimeToUtc($('calEditDate').value, $('calEditEnd').value);
+    if (!newEnd) return;
+    if (newEnd === _editing.end_time) return;
+    saveBookingPatch({ end_time: newEnd });
+  }
+
+  $('calEditDate').addEventListener('change', handleStart);
+  $('calEditDate').addEventListener('blur', handleStart);
+  $('calEditStart').addEventListener('blur', handleStart);
+  $('calEditEnd').addEventListener('blur', handleEnd);
+
+  $('calEditService').addEventListener('change', function() {
+    var svcId = $('calEditService').value || null;
+    var svcObj = (_services || []).find(function(s){ return String(s.id) === String(svcId); });
+    // Update locally so the calendar block reflects the new service name & duration
+    if (svcObj) _editing.services = { id: svcObj.id, name: svcObj.name, duration_min: svcObj.duration_min, price_cents: svcObj.price_cents };
+    saveBookingPatch({ service_id: svcId });
+  });
+
+  $('calEditStatus').addEventListener('change', function() {
+    saveBookingPatch({ status: $('calEditStatus').value });
+  });
+
+  $('calEditClient').addEventListener('blur', function() {
+    var v = $('calEditClient').value.trim();
+    var cur = (_editing.clients && _editing.clients.name) || '';
+    if (v === cur) return;
+    if (_editing.client_id) {
+      supabase.from('clients').update({ name: v }).eq('id', _editing.client_id).then(function(res) {
+        if (res.error) { console.error(res.error); showToast(t('error_save'), 1800); return; }
+        if (!_editing.clients) _editing.clients = {};
+        _editing.clients.name = v;
+        // Keep cached client list in sync if present
+        var c = findClient(_editing.client_id); if (c) c.name = v;
+        renderCalendar();
+        showToast(t('saved'), 1000);
+      });
+    } else {
+      if (!_editing.clients) _editing.clients = {};
+      _editing.clients.name = v;
+      renderCalendar();
+    }
+  });
+
+  $('calEditNotes').addEventListener('blur', function() {
+    var v = $('calEditNotes').value;
+    if (v === (_editing.notes || '')) return;
+    saveBookingPatch({ notes: v });
+  });
+}
+
+wireBookingBlurSaves();
+
+$('calEditCloseBtn').addEventListener('click', closeEdit);
 $('calEditOverlay').addEventListener('click', function(e){ if (e.target === this) closeEdit(); });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && $('calEditOverlay').classList.contains('open')) closeEdit();
+});
 
 // ── Clients ──
 function getInitials(name) {
@@ -1920,51 +3309,685 @@ function getInitials(name) {
 
 var phoneSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
 
-function renderClients(filter) {
-  var list = DEMO_CLIENTS_LIST;
-  if (filter) {
-    var q = filter.toLowerCase();
+// ── Clients state ──
+var _clients = null;          // full list
+var _clientsLoading = false;
+var _clientFilter = '';
+var _expandedClientId = null; // currently expanded client card
+var _clientBookingsCache = {}; // clientId -> bookings[]
+
+async function fetchClients() {
+  if (_clientsLoading) return;
+  _clientsLoading = true;
+  try {
+    var res = await supabase.from('clients')
+      .select('*')
+      .eq('business_id', BUSINESS_ID)
+      .order('name');
+    if (res.error) throw res.error;
+    var data = res.data || [];
+    // Fall back to demo clients when the DB is empty so the UI is populated
+    _clients = data.length ? data : DEMO_CLIENTS.slice();
+  } catch (e) {
+    console.error('Failed to fetch clients', e);
+    _clients = DEMO_CLIENTS.slice();
+  } finally {
+    _clientsLoading = false;
+  }
+}
+
+async function fetchClientBookings(clientId) {
+  if (_clientBookingsCache[clientId]) return _clientBookingsCache[clientId];
+  function demoFallback() {
+    return allBookings.filter(function(b){
+      return String(b.client_id) === String(clientId) ||
+             (b.clients && String(b.clients.id) === String(clientId));
+    }).sort(function(a, b){ return new Date(b.start_time) - new Date(a.start_time); });
+  }
+  try {
+    var res = await supabase.from('bookings')
+      .select('*, services(name)')
+      .eq('client_id', clientId)
+      .order('start_time', { ascending: false });
+    if (res.error) throw res.error;
+    var data = (res.data && res.data.length) ? res.data : demoFallback();
+    _clientBookingsCache[clientId] = data;
+    return data;
+  } catch (e) {
+    console.error('Failed to fetch bookings', e);
+    var demo = demoFallback();
+    _clientBookingsCache[clientId] = demo;
+    return demo;
+  }
+}
+
+async function renderClients() {
+  if (_clients === null) {
+    clientsView.innerHTML = '<input class="clients-search" type="text" id="clientSearch" placeholder="' + t('search_clients') + '" value="' + escHtml(_clientFilter) + '">' +
+      '<div class="clients-count">…</div>';
+    await fetchClients();
+  }
+  paintClients();
+}
+
+function paintClients() {
+  var list = _clients || [];
+  if (_clientFilter) {
+    var q = _clientFilter.toLowerCase();
     list = list.filter(function(c) {
-      return c.name.toLowerCase().indexOf(q) !== -1 || c.phone.indexOf(q) !== -1;
+      return (c.name || '').toLowerCase().indexOf(q) !== -1 ||
+             (c.phone || '').indexOf(_clientFilter) !== -1;
     });
   }
 
-  var html = '<input class="clients-search" type="text" id="clientSearch" placeholder="' + t('search_clients') + '" value="' + escHtml(filter || '') + '">';
+  var html = '<input class="clients-search" type="text" id="clientSearch" placeholder="' + t('search_clients') + '" value="' + escHtml(_clientFilter) + '">';
 
   if (list.length === 0) {
     html += emptyStateHtml(_EMPTY_CLIENTS_ICON, t('empty_clients_title'), t('empty_clients_desc'));
   } else {
     html += '<div class="clients-count">' + list.length + ' ' + t('nav_clients').toLowerCase() + '</div>';
-
+    html += '<div class="clients-list">';
     for (var i = 0; i < list.length; i++) {
       var c = list[i];
-      html += '<div class="client-row">' +
-        '<div class="client-avatar">' + getInitials(c.name) + '</div>' +
-        '<div class="client-info">' +
-          '<div class="client-name">' + escHtml(c.name) + '</div>' +
-          '<div class="client-meta"><span>' + c.visits + ' ' + t('client_visits') + '</span><span>' + c.last + '</span></div>' +
+      var expanded = c.id === _expandedClientId;
+      html += '<div class="client-card' + (expanded ? ' expanded' : '') + '" data-id="' + escHtml(c.id) + '">' +
+        '<div class="client-card-row">' +
+          '<div class="client-avatar">' + escHtml(getInitials(c.name || '?')) + '</div>' +
+          '<div class="client-info">' +
+            '<div class="client-name">' + escHtml(c.name || '—') + '</div>' +
+            '<div class="client-meta"><span>' + escHtml(c.phone || '') + '</span></div>' +
+          '</div>' +
+          (c.phone ? '<a class="client-phone-btn" href="tel:' + escHtml(c.phone) + '" aria-label="Call" onclick="event.stopPropagation()">' + phoneSvg + '</a>' : '') +
         '</div>' +
-        '<a class="client-phone-btn" href="tel:' + c.phone + '">' + phoneSvg + '</a></div>';
+        (expanded ? '<div class="client-detail" id="clientDetail-' + escHtml(c.id) + '">' +
+            '<div class="client-detail-loading">…</div>' +
+          '</div>' : '') +
+      '</div>';
     }
+    html += '</div>';
   }
 
   clientsView.innerHTML = html;
 
   $('clientSearch').addEventListener('input', function(e) {
-    renderClients(e.target.value);
+    _clientFilter = e.target.value;
+    paintClients();
     var el = $('clientSearch');
-    el.focus();
-    el.setSelectionRange(el.value.length, el.value.length);
+    if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
   });
+
+  clientsView.querySelectorAll('.client-card').forEach(function(card) {
+    var rowEl = card.querySelector('.client-card-row');
+    rowEl.addEventListener('click', function() {
+      var id = card.dataset.id;
+      _expandedClientId = (_expandedClientId === id) ? null : id;
+      paintClients();
+      if (_expandedClientId === id) loadClientDetail(id);
+    });
+  });
+
+  // If a card is expanded, load its detail
+  if (_expandedClientId) loadClientDetail(_expandedClientId);
+}
+
+// Per-client notes are stored in localStorage for now, since the Supabase
+// clients table doesn't have a notes column yet. TODO: move this to Supabase
+// (clients.notes) when the schema is updated.
+function getClientNotes(clientId) {
+  try { return localStorage.getItem('operis_client_notes_' + clientId) || ''; }
+  catch (e) { return ''; }
+}
+function setClientNotes(clientId, notes) {
+  try { localStorage.setItem('operis_client_notes_' + clientId, notes); }
+  catch (e) { /* quota or disabled */ }
+}
+
+var _editingClientId = null;
+
+async function loadClientDetail(clientId) {
+  var host = document.getElementById('clientDetail-' + clientId);
+  if (!host) return;
+  var bookings = await fetchClientBookings(clientId);
+  if (!host.isConnected) return;
+  paintClientDetail(host, clientId, bookings);
+}
+
+function findClient(id) {
+  return (_clients || []).find(function(c){ return String(c.id) === String(id); });
+}
+
+function paintClientDetail(host, clientId, bookings) {
+  var client = findClient(clientId) || {};
+  var totalVisits = bookings.length;
+  var lastVisit = bookings.length ? toBangkok(bookings[0].start_time) : null;
+  var editing = _editingClientId === clientId;
+  var notes = getClientNotes(clientId);
+
+  var editIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>';
+
+  var header;
+  if (editing) {
+    header = '<div class="client-edit-block">' +
+      '<div class="profile-field">' +
+        '<label class="profile-field-label">' + escHtml(t('cal_edit_client')) + '</label>' +
+        '<input type="text" class="profile-input" id="clientEditName-' + escHtml(clientId) + '" value="' + escHtml(client.name || '') + '">' +
+      '</div>' +
+      '<div class="profile-field">' +
+        '<label class="profile-field-label">' + escHtml(t('phone')) + '</label>' +
+        '<input type="tel" class="profile-input" id="clientEditPhone-' + escHtml(clientId) + '" value="' + escHtml(client.phone || '') + '">' +
+      '</div>' +
+      '<div class="profile-field">' +
+        '<label class="profile-field-label">' + escHtml(t('notes')) + '</label>' +
+        '<textarea class="profile-input profile-textarea" id="clientEditNotes-' + escHtml(clientId) + '" rows="3">' + escHtml(notes) + '</textarea>' +
+      '</div>' +
+    '</div>';
+  } else {
+    header = '<div class="client-edit-row">' +
+      '<button class="client-edit-pencil" id="clientPencil-' + escHtml(clientId) + '" aria-label="' + escHtml(t('edit')) + '">' + editIcon + '</button>' +
+    '</div>' +
+    (notes ? '<div class="client-detail-notes">' +
+      '<div class="client-detail-label">' + escHtml(t('notes')) + '</div>' +
+      '<div class="client-notes-text">' + escHtml(notes) + '</div>' +
+    '</div>' : '');
+  }
+
+  var summary = '<div class="client-detail-summary">' +
+    '<div><div class="client-detail-label">' + escHtml(t('total_visits')) + '</div><div class="client-detail-value">' + totalVisits + '</div></div>' +
+    '<div><div class="client-detail-label">' + escHtml(t('last_visit')) + '</div><div class="client-detail-value">' + (lastVisit ? escHtml(formatDate(lastVisit)) : '—') + '</div></div>' +
+  '</div>';
+
+  var rows = '';
+  if (bookings.length === 0) {
+    rows = '<div class="client-detail-empty">' + escHtml(t('no_bookings')) + '</div>';
+  } else {
+    rows = '<div class="client-detail-section-title">' + escHtml(t('booking_history')) + '</div><div class="client-booking-list">';
+    for (var i = 0; i < bookings.length; i++) {
+      var b = bookings[i];
+      var bk = toBangkok(b.start_time);
+      var svc = b.services ? (b.services.name || '—') : '—';
+      var status = b.status || 'pending';
+      var statusKey = 'status_' + status;
+      var statusLabel = STRINGS[currentLang][statusKey] || status;
+      rows += '<div class="client-booking-item">' +
+        '<div class="client-booking-date">' +
+          '<div class="cbd-day">' + bk.getDate() + ' ' + escHtml(S().months[bk.getMonth()]) + '</div>' +
+          '<div class="cbd-time">' + escHtml(formatTime(bk)) + '</div>' +
+        '</div>' +
+        '<div class="client-booking-main">' +
+          '<div class="client-booking-service">' + escHtml(svc) + '</div>' +
+          '<div class="client-booking-status status-' + escHtml(status) + '">' + escHtml(statusLabel) + '</div>' +
+        '</div>' +
+      '</div>';
+    }
+    rows += '</div>';
+  }
+
+  host.innerHTML = header + summary + rows;
+
+  if (editing) {
+    wireClientEditBlur(host, clientId);
+  } else {
+    var pencil = document.getElementById('clientPencil-' + clientId);
+    if (pencil) pencil.addEventListener('click', function() {
+      _editingClientId = clientId;
+      paintClientDetail(host, clientId, bookings);
+    });
+  }
+}
+
+function wireClientEditBlur(host, clientId) {
+  var nameEl = document.getElementById('clientEditName-' + clientId);
+  var phoneEl = document.getElementById('clientEditPhone-' + clientId);
+  var notesEl = document.getElementById('clientEditNotes-' + clientId);
+
+  async function saveField(field, value) {
+    try {
+      var res = await supabase.from('clients').update({ [field]: value }).eq('id', clientId);
+      if (res.error) throw res.error;
+      var c = findClient(clientId);
+      if (c) c[field] = value;
+      showToast(t('saved'), 1000);
+    } catch (e) {
+      console.error('Save client field failed', field, e);
+      showToast(t('error_save'), 1800);
+    }
+  }
+
+  if (nameEl) nameEl.addEventListener('blur', function() {
+    var v = nameEl.value.trim();
+    var c = findClient(clientId);
+    if (!c || v === (c.name || '')) return;
+    saveField('name', v);
+  });
+  if (phoneEl) phoneEl.addEventListener('blur', function() {
+    var v = phoneEl.value.trim();
+    var c = findClient(clientId);
+    if (!c || v === (c.phone || '')) return;
+    saveField('phone', v);
+  });
+  if (notesEl) notesEl.addEventListener('blur', function() {
+    var v = notesEl.value;
+    if (v === getClientNotes(clientId)) return;
+    setClientNotes(clientId, v);
+    showToast(t('saved'), 1000);
+  });
+}
+
+// ── Services ──
+var _services = null;
+var _servicesLoading = false;
+var _editingService = null; // currently-edited service object (null = list mode; {} = new)
+
+async function fetchServices() {
+  if (_servicesLoading) return;
+  _servicesLoading = true;
+  try {
+    var res = await supabase.from('services')
+      .select('*')
+      .eq('business_id', BUSINESS_ID)
+      .order('name');
+    if (res.error) throw res.error;
+    var data = res.data || [];
+    _services = data.length ? data : DEMO_SERVICES.slice();
+  } catch (e) {
+    console.error('Failed to fetch services', e);
+    _services = DEMO_SERVICES.slice();
+  } finally {
+    _servicesLoading = false;
+  }
+}
+
+function fmtPriceBaht(cents) {
+  var baht = Math.round((cents || 0)) / 100;
+  return '฿' + (Math.round(baht * 100) / 100).toLocaleString('en-US', {
+    minimumFractionDigits: 0, maximumFractionDigits: 2
+  });
+}
+
+var servicesView = document.getElementById('servicesView');
+
+async function renderServices() {
+  if (_services === null) {
+    servicesView.innerHTML = '<div class="services-header"><span class="services-title">Loading…</span></div>';
+    await fetchServices();
+  }
+  if (_editingService !== null) {
+    paintServiceEditor();
+  } else {
+    paintServicesList();
+  }
+}
+
+function paintServicesList() {
+  var list = _services || [];
+  var html = '<div class="services-header">' +
+    '<span class="services-title">' + escHtml(t('nav_services')) + ' · ' + list.length + '</span>' +
+    '<button class="btn-add-service" id="btnAddService">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>' +
+      escHtml(t('add_service')) +
+    '</button>' +
+  '</div>';
+
+  if (list.length === 0) {
+    html += '<div class="recent-empty">' + escHtml(t('no_services')) + '</div>';
+  } else {
+    html += '<div class="services-list">';
+    for (var i = 0; i < list.length; i++) {
+      var s = list[i];
+      var active = s.is_active !== false;
+      var dur = s.duration_min || 0;
+      html += '<div class="service-card' + (active ? '' : ' inactive') + '" data-id="' + escHtml(s.id) + '">' +
+        '<div class="service-main">' +
+          '<div class="service-name">' + escHtml(s.name || '—') + '</div>' +
+          '<div class="service-meta"><span>' + dur + ' ' + escHtml(t('min_unit')) + '</span></div>' +
+        '</div>' +
+        '<div class="service-price">' + escHtml(formatMoney(s.price_cents)) + '</div>' +
+        '<button class="toggle" aria-pressed="' + (active ? 'true' : 'false') + '" aria-label="' + escHtml(t('active')) + '" data-id="' + escHtml(s.id) + '"></button>' +
+      '</div>';
+    }
+    html += '</div>';
+  }
+
+  servicesView.innerHTML = html;
+
+  $('btnAddService').addEventListener('click', function() {
+    _editingService = { _new: true, name: '', duration_min: 30, price_cents: 0, is_active: true };
+    paintServiceEditor();
+  });
+
+  servicesView.querySelectorAll('.service-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.toggle')) return;
+      var id = card.dataset.id;
+      var svc = (_services || []).find(function(x){ return String(x.id) === String(id); });
+      if (svc) { _editingService = Object.assign({}, svc); paintServiceEditor(); }
+    });
+  });
+
+  servicesView.querySelectorAll('.toggle').forEach(function(tg) {
+    tg.addEventListener('click', function() {
+      var id = tg.dataset.id;
+      var svc = (_services || []).find(function(x){ return String(x.id) === String(id); });
+      if (svc) toggleServiceActive(svc, tg);
+    });
+  });
+}
+
+async function toggleServiceActive(svc, btn) {
+  var newVal = !(svc.is_active !== false);
+  btn.setAttribute('aria-pressed', newVal ? 'true' : 'false');
+  svc.is_active = newVal;
+  try {
+    var res = await supabase.from('services').update({ is_active: newVal }).eq('id', svc.id);
+    if (res.error) throw res.error;
+    // Update the parent card's inactive class
+    var card = btn.closest('.service-card');
+    if (card) card.classList.toggle('inactive', !newVal);
+  } catch (e) {
+    console.error('Toggle failed', e);
+    svc.is_active = !newVal;
+    btn.setAttribute('aria-pressed', !newVal ? 'true' : 'false');
+    showToast(t('error_save'), 2000);
+  }
+}
+
+function paintServiceEditor() {
+  var s = _editingService;
+  var isNew = !!s._new;
+  var baht = ((s.price_cents || 0) / 100);
+  var active = s.is_active !== false;
+
+  var priceLabel = t('price') + (currentCurrency === 'USD' ? ' ($)' : ' (฿)');
+  var priceDisplay = currentCurrency === 'USD'
+    ? (Math.round((baht / USD_RATE) * 100) / 100)
+    : baht;
+  var priceStep = '0.01';
+
+  var html = '<button class="back-link" id="svcBack">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>' +
+    escHtml(t('nav_services')) +
+  '</button>' +
+  '<div class="service-edit">' +
+    '<div class="service-edit-title">' + escHtml(isNew ? t('new_service') : t('edit_service')) + '</div>' +
+    '<div class="profile-field">' +
+      '<label class="profile-field-label">' + escHtml(t('service_name')) + '</label>' +
+      '<input type="text" class="profile-input" id="svcName" value="' + escHtml(s.name || '') + '">' +
+    '</div>' +
+    '<div class="service-edit-row">' +
+      '<div class="profile-field">' +
+        '<label class="profile-field-label">' + escHtml(t('duration')) + '</label>' +
+        '<input type="number" class="profile-input" id="svcDuration" min="1" value="' + (s.duration_min || '') + '">' +
+      '</div>' +
+      '<div class="profile-field">' +
+        '<label class="profile-field-label">' + escHtml(priceLabel) + '</label>' +
+        '<input type="number" class="profile-input" id="svcPrice" min="0" step="' + priceStep + '" value="' + priceDisplay + '">' +
+      '</div>' +
+    '</div>' +
+    '<div class="service-edit-toggle-row">' +
+      '<span class="service-edit-toggle-label">' + escHtml(t('active')) + '</span>' +
+      '<button class="toggle" id="svcActive" aria-pressed="' + (active ? 'true' : 'false') + '" aria-label="' + escHtml(t('active')) + '"></button>' +
+    '</div>' +
+    '<div class="service-edit-actions">' +
+      (isNew ? '' : '<button class="profile-btn profile-btn-delete" id="svcDelete">' + escHtml(t('delete_btn')) + '</button>') +
+      '<button class="profile-btn profile-btn-save" id="svcSave">' + escHtml(t('cal_edit_done')) + '</button>' +
+    '</div>' +
+  '</div>';
+
+  servicesView.innerHTML = html;
+
+  $('svcBack').addEventListener('click', function() { _editingService = null; paintServicesList(); });
+
+  $('svcActive').addEventListener('click', function() {
+    var cur = this.getAttribute('aria-pressed') === 'true';
+    this.setAttribute('aria-pressed', cur ? 'false' : 'true');
+  });
+
+  $('svcSave').addEventListener('click', saveService);
+
+  var delBtn = $('svcDelete');
+  if (delBtn) delBtn.addEventListener('click', deleteService);
+}
+
+async function saveService() {
+  var s = _editingService;
+  var name = $('svcName').value.trim();
+  var duration = parseInt($('svcDuration').value, 10) || 0;
+  var priceInput = parseFloat($('svcPrice').value) || 0;
+  // Convert input back to baht for storage if user is entering USD
+  var priceBaht = currentCurrency === 'USD' ? (priceInput * USD_RATE) : priceInput;
+  var active = $('svcActive').getAttribute('aria-pressed') === 'true';
+  if (!name) { showToast(t('required_name'), 1500); return; }
+
+  var payload = {
+    name: name,
+    duration_min: duration,
+    price_cents: Math.round(priceBaht * 100),
+    is_active: active,
+    business_id: BUSINESS_ID,
+  };
+
+  var btn = $('svcSave'); btn.disabled = true;
+  try {
+    if (s._new) {
+      var ins = await supabase.from('services').insert(payload).select().single();
+      if (ins.error) throw ins.error;
+      _services.push(ins.data);
+    } else {
+      var upd = await supabase.from('services').update(payload).eq('id', s.id);
+      if (upd.error) throw upd.error;
+      var idx = _services.findIndex(function(x){ return x.id === s.id; });
+      if (idx >= 0) _services[idx] = Object.assign({}, _services[idx], payload);
+    }
+    _services.sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
+    showToast(t('saved'), 1000);
+    _editingService = null;
+    paintServicesList();
+  } catch (e) {
+    console.error('Save service failed', e);
+    showToast(t('error_save'), 2000);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function deleteService() {
+  var s = _editingService;
+  if (!s || s._new) return;
+  if (!confirm(t('delete_confirm'))) return;
+  try {
+    var res = await supabase.from('services').delete().eq('id', s.id);
+    if (res.error) throw res.error;
+    _services = _services.filter(function(x){ return x.id !== s.id; });
+    _editingService = null;
+    paintServicesList();
+    showToast(t('saved'), 1000);
+  } catch (e) {
+    console.error('Delete failed', e);
+    showToast(t('error_save'), 2000);
+  }
+}
+
+// ── Recent Clients (dashboard card) ──
+function renderRecentClients() {
+  var host = $('recentClientsList');
+  if (!host) return;
+  var viewAll = $('recentViewAll');
+  var source = (_clients && _clients.length) ? _clients : DEMO_CLIENTS;
+  var list = source.slice(0, 5);
+  if (!list.length) {
+    host.innerHTML = '<div class="recent-empty">' + escHtml(t('no_recent')) + '</div>';
+    if (viewAll) viewAll.hidden = true;
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var c = list[i];
+    html += '<div class="client-row">' +
+      '<div class="client-avatar">' + escHtml(getInitials(c.name || '?')) + '</div>' +
+      '<div class="client-info">' +
+        '<div class="client-name">' + escHtml(c.name || '—') + '</div>' +
+        '<div class="client-meta"><span>' + escHtml(c.phone || '') + '</span></div>' +
+      '</div>' +
+      (c.phone ? '<a class="client-phone-btn" href="tel:' + escHtml(c.phone) + '" aria-label="Call">' + phoneSvg + '</a>' : '') +
+    '</div>';
+  }
+  host.innerHTML = html;
+  if (viewAll) viewAll.hidden = false;
+}
+
+// ── Revenue Summary (7-day bar chart) ──
+// Revenue is computed from confirmed bookings' services.price_cents.
+// _revenueBookings holds the last-7-days slice fetched in loadDashboard.
+// If that's empty (e.g. Supabase unavailable), fall back to the demo
+// bookings that overlap the same window.
+function computeRevenueByDay() {
+  var today = nowBangkok(); today.setHours(0,0,0,0);
+  var startKey = dateKey(new Date(today.getTime() - 6 * 86400000));
+  var endKey = dateKey(today);
+
+  var source = (_revenueBookings && _revenueBookings.length) ? _revenueBookings : null;
+  if (!source) {
+    // Demo fallback: include any demo bookings that happen to fall in the window
+    source = allBookings.filter(function(b) {
+      var k = dateKey(toBangkok(b.start_time));
+      return k >= startKey && k <= endKey;
+    });
+  }
+
+  var byKey = {};
+  for (var i = 0; i < source.length; i++) {
+    var b = source[i];
+    var bk = toBangkok(b.start_time);
+    var k = dateKey(bk);
+    var cents = (b.services && b.services.price_cents) || 0;
+    byKey[k] = (byKey[k] || 0) + cents;
+  }
+
+  var days = [];
+  var totalCents = 0;
+  for (var j = 6; j >= 0; j--) {
+    var d = new Date(today); d.setDate(d.getDate() - j);
+    var k = dateKey(d);
+    var cents = byKey[k] || 0;
+    days.push({ date: d, cents: cents });
+    totalCents += cents;
+  }
+  return { days: days, totalCents: totalCents };
+}
+
+function renderRevenueCard() {
+  var host = $('revenueCard');
+  if (!host) return;
+  var s = S();
+  var data = computeRevenueByDay();
+  var maxCents = 0;
+  for (var k = 0; k < data.days.length; k++) if (data.days[k].cents > maxCents) maxCents = data.days[k].cents;
+
+  var todayKey = dateKey(nowBangkok());
+  var html =
+    '<div class="revenue-summary">' +
+      '<div class="revenue-total">' + escHtml(formatMoney(data.totalCents)) + '</div>' +
+      '<div class="revenue-period">' + escHtml(t('revenue_total')) + '</div>' +
+    '</div>' +
+    '<div class="revenue-chart">';
+  for (var j = 0; j < data.days.length; j++) {
+    var day = data.days[j];
+    var heightPct = maxCents > 0 ? Math.round((day.cents / maxCents) * 100) : 0;
+    var isToday = dateKey(day.date) === todayKey;
+    var tip = formatMoney(day.cents);
+    html += '<div class="revenue-bar-col' + (isToday ? ' is-today' : '') + '" title="' + escHtml(tip) + '">' +
+      '<div class="revenue-bar-track"><div class="revenue-bar" style="height:'+heightPct+'%"></div></div>' +
+      '<div class="revenue-bar-label">' + escHtml(s.days_short[day.date.getDay()]) + '</div>' +
+    '</div>';
+  }
+  html += '</div>';
+  host.innerHTML = html;
+}
+
+// ── AI Activity Feed ──
+function timeAgo(date) {
+  var s = S();
+  var now = nowBangkok();
+  var diff = Math.floor((now.getTime() - date.getTime()) / 1000);
+  if (diff < 60) return s.time_just_now || 'just now';
+  var th = S().use_buddhist;
+  if (diff < 3600) {
+    var m = Math.floor(diff / 60);
+    return th ? (m + (s.time_min || ' นาที') + (s.time_ago || '')) : (m + (s.time_min || 'm') + ' ' + (s.time_ago || 'ago'));
+  }
+  if (diff < 86400) {
+    var hr = Math.floor(diff / 3600);
+    return th ? (hr + (s.time_hr || ' ชม.') + (s.time_ago || '')) : (hr + (s.time_hr || 'h') + ' ' + (s.time_ago || 'ago'));
+  }
+  var dd = Math.floor(diff / 86400);
+  return th ? (dd + (s.time_day || ' วัน') + (s.time_ago || '')) : (dd + (s.time_day || 'd') + ' ' + (s.time_ago || 'ago'));
+}
+
+function renderAIActivity() {
+  var host = $('aiActivityFeed');
+  if (!host) return;
+  var aiItems = allBookings.filter(function(b){
+    return !b.source || b.source === 'ai' || b.source === 'AI';
+  });
+  aiItems.sort(function(a, b) {
+    var at = new Date(a.created_at || a.start_time).getTime();
+    var bt = new Date(b.created_at || b.start_time).getTime();
+    return bt - at;
+  });
+  var list = aiItems.slice(0, 5);
+  if (!list.length) {
+    host.innerHTML = '<div class="activity-empty">' + escHtml(t('no_activity')) + '</div>';
+    return;
+  }
+  var html = '<div class="activity-list">';
+  for (var i = 0; i < list.length; i++) {
+    var b = list[i];
+    var bk = toBangkok(b.start_time);
+    var eventTime = b.created_at ? toBangkok(b.created_at) : bk;
+    var service = b.services ? b.services.name : '—';
+    var client = b.clients ? b.clients.name : '—';
+    html += '<div class="activity-item">' +
+      '<div class="activity-badge">AI</div>' +
+      '<div class="activity-content">' +
+        '<div class="activity-text">' + escHtml(t('ai_booked')) + ' <strong>' + escHtml(service) + '</strong> ' + escHtml(t('ai_for')) + ' <strong>' + escHtml(client) + '</strong> ' + escHtml(t('ai_at')) + ' ' + formatTime(bk) + '</div>' +
+        '<div class="activity-time">' + escHtml(timeAgo(eventTime)) + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+  html += '</div>';
+  host.innerHTML = html;
 }
 
 // ── Events ──
 $('refreshBtn').addEventListener('click', loadDashboard);
+var refreshDesktop = $('refreshBtnDesktop');
+if (refreshDesktop) refreshDesktop.addEventListener('click', loadDashboard);
 $('retryBtn').addEventListener('click', loadDashboard);
 
 $('navBookings').addEventListener('click', function() { switchView('bookings'); });
 $('navClients').addEventListener('click', function() { switchView('clients'); });
-$('navSettings').addEventListener('click', function() { switchView('settings'); });
+$('navServices').addEventListener('click', function() { switchView('services'); });
+
+// Profile panel
+var _profAvD = $('profileAvatarDesktop');
+if (_profAvD) _profAvD.addEventListener('click', openProfile);
+var _profAvM = $('profileAvatarMobile');
+if (_profAvM) _profAvM.addEventListener('click', openProfile);
+$('profileClose').addEventListener('click', closeProfile);
+$('profileOverlay').addEventListener('click', function(e){ if (e.target === this) closeProfile(); });
+wireProfileBlurSaves();
+
+// Sidebar nav (desktop)
+document.querySelectorAll('.sidebar-link').forEach(function(link) {
+  link.addEventListener('click', function() {
+    var v = link.dataset.view;
+    if (v) switchView(v);
+  });
+});
+
+// "View all" link on Recent Clients card
+var recentViewAll = $('recentViewAll');
+if (recentViewAll) recentViewAll.addEventListener('click', function() { switchView('clients'); });
 
 $('langControl').addEventListener('click', function(e) {
   var btn = e.target.closest('.seg-btn');
@@ -1976,16 +3999,19 @@ $('themeControl').addEventListener('click', function(e) {
   if (btn) setTheme(btn.dataset.val);
 });
 
+$('currencyControl').addEventListener('click', function(e) {
+  var btn = e.target.closest('.seg-btn');
+  if (btn) setCurrency(btn.dataset.val);
+});
+
 // ── Init ──
 applyTheme();
 syncSegControl($('langControl'), currentLang);
 syncSegControl($('themeControl'), currentTheme);
+syncSegControl($('currencyControl'), currentCurrency);
 applyI18n();
 measureHeader();
-window.addEventListener('resize', function(){
-  measureHeader();
-  if (typeof measureCalBar === 'function') measureCalBar();
-});
+window.addEventListener('resize', measureHeader);
 initCalBarEvents();
 renderCalendar();
 loadDashboard();
