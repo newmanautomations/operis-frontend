@@ -1722,6 +1722,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    padding: 0 8px;
   }
 
   /* ── Mobile layout (below 768px) ── */
@@ -1737,7 +1738,7 @@
     /* Calendar card: no inner padding, flush with container gutters */
     .cal-fixed-inner { padding: 14px 16px; }
     .card-calendar { padding: 0; }
-    .card-calendar .cal-scroll { padding: 0 0 12px; }
+    .card-calendar .cal-scroll { padding: 0 8px 12px; }
 
     /* Grid rows stack in a single column on mobile (default is 1fr, be explicit) */
     .grid-row-analytics,
@@ -1856,7 +1857,7 @@
     /* Calendar card: keep side padding inside card */
     .card-calendar { padding: 0; }
     .card-calendar .cal-fixed-inner { padding: 20px 24px 16px; }
-    .card-calendar .cal-scroll { height: 500px; padding: 0 12px 16px; }
+    .card-calendar .cal-scroll { height: 500px; padding: 0 8px 16px; }
 
     /* Revenue chart taller on desktop */
     .revenue-chart { height: 180px; }
